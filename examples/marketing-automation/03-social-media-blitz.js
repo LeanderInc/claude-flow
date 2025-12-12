@@ -60,16 +60,32 @@ async function runSocialMediaBlitz() {
   try {
     // Step 1: Initialize mesh swarm for parallel execution
     console.log('🕸️  Step 1: Initializing mesh swarm topology...');
-    await execAsync('npx claude-flow@alpha swarm init --topology mesh --max-agents 8');
+    await execAsync('npx claude-flow@alpha swarm init --topology mesh --max-agents 10');
     console.log('✅ Mesh swarm ready for parallel execution\n');
 
-    // Step 2: Spawn content strategist first
-    console.log('🎯 Step 2: Creating overall content strategy...');
-    await execAsync(
+    // Step 2: Spawn strategy & creative team (parallel)
+    console.log('🎯 Step 2: Creating strategy & creative direction...\n');
+
+    console.log('  📊 Spawning content strategist...');
+    const strategyPromise = execAsync(
       'npx claude-flow@alpha agent spawn --type content-strategist ' +
-      `--task "Create multi-platform social media strategy for: ${CAMPAIGN_CONFIG.theme}"`
+      `--task "Create multi-platform social media strategy for: ${CAMPAIGN_CONFIG.theme}. Include platform-specific tactics, posting frequency, engagement strategies"`
     );
-    console.log('✅ Strategy ready\n');
+
+    console.log('  🎨 Spawning brand strategist...');
+    const brandPromise = execAsync(
+      'npx claude-flow@alpha agent spawn --type brand-strategist ' +
+      `--task "Define brand messaging and voice for social campaign: ${CAMPAIGN_CONFIG.theme}. Ensure consistency across all platforms while adapting tone for each"`
+    );
+
+    console.log('  🖼️  Spawning creative director...');
+    const creativePromise = execAsync(
+      'npx claude-flow@alpha agent spawn --type creative-director ' +
+      `--task "Create visual creative direction for social campaign: ${CAMPAIGN_CONFIG.theme}. Specify: image concepts, video ideas, color schemes, design requirements for each platform"`
+    );
+
+    await Promise.all([strategyPromise, brandPromise, creativePromise]);
+    console.log('\n✅ Strategy, brand & creative direction ready\n');
 
     // Step 3: Spawn parallel agents for each platform
     console.log('🚀 Step 3: Spawning platform-specific agents in parallel...\n');
@@ -116,8 +132,14 @@ async function runSocialMediaBlitz() {
     console.log('📊 Campaign Summary:');
     console.log(`   - Total platforms: ${CAMPAIGN_CONFIG.platforms.length}`);
     console.log(`   - Total posts planned: ${CAMPAIGN_CONFIG.platforms.reduce((sum, p) => sum + p.posts, 0)}`);
-    console.log(`   - Active agents: ${CAMPAIGN_CONFIG.platforms.length + 2}`); // +2 for strategist and analytics
+    console.log(`   - Active agents: ${CAMPAIGN_CONFIG.platforms.length + 5}`); // +5 for strategist, brand, creative, analytics, and platform managers
     console.log(`   - Execution mode: Parallel (mesh topology)`);
+    console.log('\n🤖 Agent Team:');
+    console.log('   - Content Strategist: Overall strategy');
+    console.log('   - Brand Strategist: Messaging & voice');
+    console.log('   - Creative Director: Visual direction');
+    console.log('   - Social Media Managers: 4 (one per platform)');
+    console.log('   - Analytics Specialist: Performance tracking');
     console.log('\n📝 Monitor progress:');
     console.log('   - Agent status: npx claude-flow@alpha agent list');
     console.log('   - Performance: npx claude-flow@alpha swarm metrics');

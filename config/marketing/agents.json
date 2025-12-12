@@ -121,6 +121,168 @@
           "persistence": "session",
           "sharedWith": ["copywriter", "content-strategist"]
         }
+      },
+      "conversion-rate-optimizer": {
+        "type": "technical-analytical",
+        "role": "Conversion Rate Optimization & Testing",
+        "capabilities": [
+          "landing-page-optimization",
+          "ab-test-planning-execution-analysis",
+          "funnel-optimization",
+          "cta-testing-optimization",
+          "user-behavior-analysis",
+          "conversion-tracking-setup",
+          "heatmap-session-replay-analysis",
+          "form-optimization",
+          "mobile-conversion-optimization",
+          "page-speed-impact-analysis",
+          "trust-signal-optimization",
+          "social-proof-implementation",
+          "urgency-scarcity-tactics",
+          "exit-intent-optimization"
+        ],
+        "tools": ["analytics", "testing", "heatmaps", "research"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["paid-search-manager", "paid-social-manager", "copywriter", "analytics-specialist"]
+        },
+        "workflows": ["conversion-audit", "ab-test-campaign", "funnel-optimization", "landing-page-optimization"]
+      },
+      "brand-strategist": {
+        "type": "strategic-creative",
+        "role": "Brand Strategy & Identity",
+        "capabilities": [
+          "brand-voice-tone-definition",
+          "brand-guidelines-creation",
+          "messaging-framework-development",
+          "brand-positioning-strategy",
+          "visual-identity-guidelines",
+          "brand-consistency-audits",
+          "competitor-brand-analysis",
+          "brand-storytelling-narrative",
+          "brand-archetype-definition",
+          "tagline-slogan-creation",
+          "brand-personality-definition",
+          "internal-brand-training",
+          "brand-evolution-refresh"
+        ],
+        "tools": ["research", "analytics", "competitive-intelligence", "design-systems"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["creative-director", "copywriter", "content-strategist", "social-media-manager"]
+        },
+        "workflows": ["brand-development", "brand-refresh", "brand-audit", "messaging-framework"]
+      },
+      "creative-director": {
+        "type": "creative-visual",
+        "role": "Visual & Video Creative Direction",
+        "capabilities": [
+          "image-concept-generation",
+          "video-script-storyboarding",
+          "visual-storytelling",
+          "design-brief-creation",
+          "creative-campaign-concepts",
+          "asset-specifications",
+          "stock-photo-video-recommendations",
+          "video-storyboard-planning",
+          "photography-direction",
+          "graphic-design-direction",
+          "animation-motion-graphics",
+          "ugc-strategy",
+          "influencer-content-briefs",
+          "platform-specific-creative-optimization"
+        ],
+        "tools": ["design-tools", "stock-libraries", "video-platforms", "ai-image-generation"],
+        "memory": {
+          "enabled": true,
+          "persistence": "session",
+          "sharedWith": ["brand-strategist", "social-media-manager", "paid-social-manager", "copywriter"]
+        },
+        "workflows": ["creative-campaign", "video-production", "brand-photoshoot", "ugc-campaign"]
+      },
+      "paid-search-manager": {
+        "type": "performance-marketing",
+        "role": "Google Ads & Search Campaign Management",
+        "capabilities": [
+          "google-ads-campaign-structure",
+          "keyword-research-match-types",
+          "search-ad-copy-rsas",
+          "bid-strategy-recommendations",
+          "quality-score-optimization",
+          "negative-keyword-management",
+          "landing-page-alignment",
+          "ad-extension-optimization",
+          "search-campaign-reporting",
+          "shopping-feed-optimization",
+          "local-services-ads",
+          "call-only-campaigns",
+          "competitor-keyword-targeting",
+          "budget-pacing-allocation"
+        ],
+        "tools": ["google-ads", "keyword-research", "analytics", "competitor-intelligence"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["conversion-rate-optimizer", "analytics-specialist", "copywriter", "seo-optimizer"]
+        },
+        "workflows": ["paid-search-campaign", "keyword-expansion", "search-audit", "pmax-campaign"]
+      },
+      "paid-social-manager": {
+        "type": "performance-marketing",
+        "role": "Social Media Advertising Across Platforms",
+        "capabilities": [
+          "facebook-instagram-ads-campaigns",
+          "linkedin-ads-strategy",
+          "twitter-x-ads-optimization",
+          "tiktok-ads-creative-targeting",
+          "pinterest-ads-strategy",
+          "reddit-ads-awareness-conversion",
+          "audience-targeting-segmentation",
+          "ad-creative-recommendations",
+          "budget-allocation-platforms",
+          "retargeting-campaigns",
+          "dynamic-product-ads",
+          "lead-gen-forms",
+          "social-ad-performance-optimization",
+          "platform-pixel-implementation"
+        ],
+        "tools": ["facebook-ads", "linkedin-ads", "tiktok-ads", "analytics", "audience-insights"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["conversion-rate-optimizer", "creative-director", "analytics-specialist", "brand-strategist"]
+        },
+        "workflows": ["paid-social-campaign", "retargeting-campaign", "social-lead-gen", "multi-platform-ads"]
+      },
+      "customer-insights-analyst": {
+        "type": "research-analytical",
+        "role": "Customer Intelligence & Voice of Customer",
+        "capabilities": [
+          "customer-interview-analysis",
+          "survey-design-analysis",
+          "voice-of-customer-extraction",
+          "pain-point-identification",
+          "jobs-to-be-done-research",
+          "customer-journey-mapping",
+          "persona-development",
+          "reddit-forum-research",
+          "review-mining-analysis",
+          "customer-feedback-synthesis",
+          "competitive-customer-analysis",
+          "feature-request-prioritization",
+          "sentiment-analysis",
+          "customer-segmentation",
+          "win-loss-analysis"
+        ],
+        "tools": ["research", "analytics", "reddit-mcp", "survey-tools", "review-aggregators"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["content-strategist", "brand-strategist", "copywriter", "analytics-specialist"]
+        },
+        "workflows": ["customer-research-sprint", "persona-development", "voice-of-customer-analysis", "competitive-research"]
       }
     }
   }

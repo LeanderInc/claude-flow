@@ -94,12 +94,205 @@
         ],
         "flow": "parallel",
         "concurrency": 4
+      },
+      "conversion-optimization-audit": {
+        "description": "Complete CRO audit of website and funnels",
+        "agents": ["conversion-rate-optimizer", "analytics-specialist"],
+        "flow": "sequential",
+        "stages": [
+          {
+            "name": "analysis",
+            "agents": ["conversion-rate-optimizer"],
+            "parallel": false
+          },
+          {
+            "name": "reporting",
+            "agents": ["analytics-specialist"],
+            "parallel": false
+          }
+        ]
+      },
+      "brand-refresh": {
+        "description": "Complete brand refresh with new identity",
+        "agents": ["brand-strategist", "creative-director", "copywriter", "editor"],
+        "flow": "sequential-parallel",
+        "stages": [
+          {
+            "name": "brand-strategy",
+            "agents": ["brand-strategist"],
+            "parallel": false
+          },
+          {
+            "name": "creative-execution",
+            "agents": ["creative-director", "copywriter"],
+            "parallel": true
+          },
+          {
+            "name": "review",
+            "agents": ["editor"],
+            "parallel": false
+          }
+        ]
+      },
+      "creative-campaign": {
+        "description": "Creative campaign development with visual assets",
+        "agents": ["creative-director", "brand-strategist", "copywriter", "social-media-manager"],
+        "flow": "sequential-parallel",
+        "stages": [
+          {
+            "name": "concept",
+            "agents": ["creative-director", "brand-strategist"],
+            "parallel": true
+          },
+          {
+            "name": "execution",
+            "agents": ["copywriter", "social-media-manager"],
+            "parallel": true
+          }
+        ]
+      },
+      "paid-search-campaign": {
+        "description": "Complete Google Ads search campaign",
+        "agents": ["paid-search-manager", "conversion-rate-optimizer", "analytics-specialist", "copywriter"],
+        "flow": "sequential",
+        "stages": [
+          {
+            "name": "keyword-research",
+            "agents": ["paid-search-manager"],
+            "parallel": false
+          },
+          {
+            "name": "ad-copy-landing-page",
+            "agents": ["copywriter", "conversion-rate-optimizer"],
+            "parallel": true
+          },
+          {
+            "name": "setup-tracking",
+            "agents": ["paid-search-manager", "analytics-specialist"],
+            "parallel": true
+          }
+        ]
+      },
+      "paid-social-campaign": {
+        "description": "Multi-platform paid social advertising",
+        "agents": ["paid-social-manager", "creative-director", "conversion-rate-optimizer", "analytics-specialist"],
+        "flow": "sequential-parallel",
+        "stages": [
+          {
+            "name": "strategy-creative",
+            "agents": ["paid-social-manager", "creative-director"],
+            "parallel": true
+          },
+          {
+            "name": "optimization-setup",
+            "agents": ["conversion-rate-optimizer", "analytics-specialist"],
+            "parallel": true
+          }
+        ]
+      },
+      "full-performance-marketing": {
+        "description": "Integrated paid search and social campaign",
+        "agents": ["paid-search-manager", "paid-social-manager", "conversion-rate-optimizer", "analytics-specialist", "copywriter", "creative-director"],
+        "flow": "parallel",
+        "concurrency": 6
+      },
+      "customer-research-sprint": {
+        "description": "Deep customer research and insights gathering",
+        "agents": ["customer-insights-analyst"],
+        "flow": "sequential",
+        "stages": [
+          {
+            "name": "research",
+            "agents": ["customer-insights-analyst"],
+            "parallel": false
+          }
+        ]
+      },
+      "persona-development": {
+        "description": "Comprehensive persona development from research",
+        "agents": ["customer-insights-analyst", "brand-strategist", "content-strategist"],
+        "flow": "sequential",
+        "stages": [
+          {
+            "name": "research",
+            "agents": ["customer-insights-analyst"],
+            "parallel": false
+          },
+          {
+            "name": "strategy-alignment",
+            "agents": ["brand-strategist", "content-strategist"],
+            "parallel": true
+          }
+        ]
+      },
+      "voice-of-customer-analysis": {
+        "description": "VOC analysis from reviews, Reddit, and surveys",
+        "agents": ["customer-insights-analyst", "content-strategist"],
+        "flow": "sequential",
+        "stages": [
+          {
+            "name": "voc-extraction",
+            "agents": ["customer-insights-analyst"],
+            "parallel": false
+          },
+          {
+            "name": "content-application",
+            "agents": ["content-strategist"],
+            "parallel": false
+          }
+        ]
+      },
+      "integrated-launch-campaign": {
+        "description": "Major product launch with all 13 agents",
+        "agents": [
+          "customer-insights-analyst",
+          "brand-strategist",
+          "creative-director",
+          "content-strategist",
+          "copywriter",
+          "seo-optimizer",
+          "editor",
+          "social-media-manager",
+          "email-automation-specialist",
+          "paid-search-manager",
+          "paid-social-manager",
+          "conversion-rate-optimizer",
+          "analytics-specialist"
+        ],
+        "flow": "sequential-parallel",
+        "stages": [
+          {
+            "name": "research-strategy",
+            "agents": ["customer-insights-analyst", "brand-strategist"],
+            "parallel": true
+          },
+          {
+            "name": "creative-content",
+            "agents": ["creative-director", "content-strategist", "copywriter"],
+            "parallel": true
+          },
+          {
+            "name": "optimization",
+            "agents": ["seo-optimizer", "editor", "conversion-rate-optimizer"],
+            "parallel": true
+          },
+          {
+            "name": "distribution",
+            "agents": ["social-media-manager", "email-automation-specialist", "paid-search-manager", "paid-social-manager"],
+            "parallel": true
+          },
+          {
+            "name": "analytics",
+            "agents": ["analytics-specialist"],
+            "parallel": false
+          }
+        ]
       }
     },
     "scaling": {
       "auto": true,
       "min": 3,
-      "max": 10,
+      "max": 15,
       "metrics": ["queue-depth", "response-time"]
     },
     "hooks": {
