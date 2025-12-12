@@ -1,0 +1,127 @@
+{
+  "marketing": {
+    "description": "AI Marketing Automation Agent Definitions",
+    "agents": {
+      "content-strategist": {
+        "type": "strategic",
+        "role": "Content Strategy & Planning",
+        "capabilities": [
+          "content-calendar-creation",
+          "audience-analysis",
+          "trend-research",
+          "seo-strategy",
+          "competitor-analysis"
+        ],
+        "tools": ["research", "analytics", "planning"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["copywriter", "social-media-manager"]
+        }
+      },
+      "copywriter": {
+        "type": "creative",
+        "role": "Content Creation & Copywriting",
+        "capabilities": [
+          "blog-writing",
+          "ad-copy-generation",
+          "email-sequences",
+          "social-media-posts",
+          "landing-page-copy",
+          "product-descriptions"
+        ],
+        "tools": ["write", "edit", "tone-analysis"],
+        "memory": {
+          "enabled": true,
+          "persistence": "session",
+          "sharedWith": ["content-strategist", "editor"]
+        }
+      },
+      "social-media-manager": {
+        "type": "operational",
+        "role": "Social Media Management & Automation",
+        "capabilities": [
+          "post-scheduling",
+          "engagement-tracking",
+          "hashtag-optimization",
+          "platform-specific-formatting",
+          "viral-content-analysis"
+        ],
+        "tools": ["schedule", "analytics", "monitor"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["content-strategist", "analytics-specialist"]
+        }
+      },
+      "email-automation-specialist": {
+        "type": "operational",
+        "role": "Email Marketing & Sequence Automation",
+        "capabilities": [
+          "drip-campaign-creation",
+          "segmentation-strategy",
+          "a-b-testing",
+          "personalization",
+          "conversion-optimization"
+        ],
+        "tools": ["email-builder", "segmentation", "analytics"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["copywriter", "analytics-specialist"]
+        }
+      },
+      "analytics-specialist": {
+        "type": "analytical",
+        "role": "Marketing Analytics & Reporting",
+        "capabilities": [
+          "campaign-performance-tracking",
+          "roi-calculation",
+          "customer-journey-mapping",
+          "predictive-analytics",
+          "dashboard-generation"
+        ],
+        "tools": ["analytics", "visualization", "reporting"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["all"]
+        }
+      },
+      "seo-optimizer": {
+        "type": "technical",
+        "role": "SEO & Search Optimization",
+        "capabilities": [
+          "keyword-research",
+          "on-page-optimization",
+          "backlink-analysis",
+          "technical-seo-audit",
+          "serp-tracking"
+        ],
+        "tools": ["seo-tools", "analytics", "research"],
+        "memory": {
+          "enabled": true,
+          "persistence": "long-term",
+          "sharedWith": ["content-strategist", "copywriter"]
+        }
+      },
+      "editor": {
+        "type": "quality-assurance",
+        "role": "Content Review & Quality Control",
+        "capabilities": [
+          "proofreading",
+          "brand-voice-consistency",
+          "fact-checking",
+          "compliance-review",
+          "readability-optimization"
+        ],
+        "tools": ["review", "edit", "quality-check"],
+        "memory": {
+          "enabled": true,
+          "persistence": "session",
+          "sharedWith": ["copywriter", "content-strategist"]
+        }
+      }
+    }
+  }
+}

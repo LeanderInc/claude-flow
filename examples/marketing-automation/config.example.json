@@ -1,0 +1,179 @@
+{
+  "_comment": "Example configuration for marketing automation campaigns",
+  "campaign": {
+    "name": "Your Campaign Name",
+    "type": "product-launch | content-marketing | lead-nurture | brand-awareness",
+    "duration": "1 week | 2 weeks | 30 days",
+    "budget": 10000,
+    "goals": {
+      "primary": "Generate 1000 qualified leads",
+      "secondary": [
+        "Increase brand awareness by 50%",
+        "Achieve 5% conversion rate",
+        "Grow social media following by 25%"
+      ]
+    },
+    "target_audience": {
+      "industry": "B2B SaaS",
+      "company_size": "50-500 employees",
+      "roles": ["Marketing Director", "CMO", "VP Marketing"],
+      "pain_points": [
+        "Manual marketing processes",
+        "Low conversion rates",
+        "Lack of automation"
+      ]
+    },
+    "channels": [
+      "email",
+      "linkedin",
+      "twitter",
+      "blog",
+      "webinars"
+    ]
+  },
+  "swarm_config": {
+    "topology": "mesh | hierarchical | adaptive",
+    "max_agents": 10,
+    "coordination": {
+      "memory_enabled": true,
+      "sync_interval": 5000,
+      "hooks_enabled": true
+    },
+    "agents": [
+      {
+        "type": "content-strategist",
+        "count": 1,
+        "priority": "high",
+        "tasks": [
+          "Audience research",
+          "Content calendar creation",
+          "Strategy development"
+        ]
+      },
+      {
+        "type": "copywriter",
+        "count": 2,
+        "priority": "high",
+        "tasks": [
+          "Blog posts",
+          "Email sequences",
+          "Social media content",
+          "Ad copy"
+        ]
+      },
+      {
+        "type": "social-media-manager",
+        "count": 1,
+        "priority": "medium",
+        "tasks": [
+          "Post scheduling",
+          "Engagement monitoring",
+          "Community management"
+        ]
+      },
+      {
+        "type": "email-automation-specialist",
+        "count": 1,
+        "priority": "high",
+        "tasks": [
+          "Sequence setup",
+          "Segmentation",
+          "A/B testing"
+        ]
+      },
+      {
+        "type": "analytics-specialist",
+        "count": 1,
+        "priority": "medium",
+        "tasks": [
+          "Performance tracking",
+          "Report generation",
+          "Optimization recommendations"
+        ]
+      }
+    ]
+  },
+  "content_requirements": {
+    "blog_posts": {
+      "count": 4,
+      "word_count": 1500,
+      "frequency": "weekly",
+      "topics": [
+        "AI marketing automation benefits",
+        "ROI of marketing automation",
+        "Marketing automation best practices",
+        "Case study: Marketing automation success"
+      ]
+    },
+    "email_sequence": {
+      "type": "onboarding | nurture | conversion",
+      "emails": 5,
+      "schedule": [
+        "Day 0: Welcome",
+        "Day 2: Value proposition",
+        "Day 5: Case study",
+        "Day 7: Pricing",
+        "Day 10: Urgency + CTA"
+      ]
+    },
+    "social_media": {
+      "linkedin": {
+        "posts_per_week": 5,
+        "content_types": ["thought-leadership", "company-news", "tips"]
+      },
+      "twitter": {
+        "posts_per_week": 15,
+        "content_types": ["quick-tips", "industry-news", "engagement"]
+      },
+      "instagram": {
+        "posts_per_week": 3,
+        "content_types": ["visuals", "quotes", "behind-the-scenes"]
+      }
+    }
+  },
+  "automation_rules": {
+    "email": {
+      "triggers": [
+        "signup",
+        "download",
+        "trial-start",
+        "inactivity-7-days"
+      ],
+      "segmentation": [
+        "by-industry",
+        "by-engagement",
+        "by-lifecycle-stage"
+      ]
+    },
+    "social": {
+      "best_times": {
+        "linkedin": ["Tuesday-Thursday, 9-11am EST"],
+        "twitter": ["Daily, 12pm and 5pm EST"]
+      },
+      "hashtag_strategy": "research-based, 3-5 per post"
+    }
+  },
+  "kpis": {
+    "engagement": {
+      "email_open_rate": 25,
+      "email_click_rate": 5,
+      "social_engagement_rate": 3
+    },
+    "conversion": {
+      "landing_page_conversion": 5,
+      "trial_to_paid": 15,
+      "lead_to_opportunity": 20
+    },
+    "growth": {
+      "email_list_growth": 10,
+      "social_followers_growth": 25,
+      "website_traffic_growth": 50
+    }
+  },
+  "integrations": {
+    "email_platform": "mailchimp | sendgrid | hubspot",
+    "social_platforms": ["buffer", "hootsuite"],
+    "analytics": ["google-analytics", "mixpanel"],
+    "crm": "salesforce | hubspot | pipedrive"
+  }
+}

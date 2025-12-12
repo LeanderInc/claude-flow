@@ -1,0 +1,111 @@
+{
+  "swarm": {
+    "name": "marketing-automation-swarm",
+    "version": "1.0.0",
+    "topology": "hierarchical",
+    "coordination": {
+      "mode": "hybrid",
+      "consensus": "raft",
+      "memory": {
+        "type": "distributed",
+        "persistence": true,
+        "syncInterval": 5000
+      }
+    },
+    "workflows": {
+      "content-campaign": {
+        "description": "Full content marketing campaign creation",
+        "agents": [
+          "content-strategist",
+          "copywriter",
+          "seo-optimizer",
+          "editor",
+          "social-media-manager",
+          "analytics-specialist"
+        ],
+        "flow": "sequential-parallel",
+        "stages": [
+          {
+            "name": "strategy",
+            "agents": ["content-strategist"],
+            "parallel": false
+          },
+          {
+            "name": "content-creation",
+            "agents": ["copywriter", "seo-optimizer"],
+            "parallel": true
+          },
+          {
+            "name": "review",
+            "agents": ["editor"],
+            "parallel": false
+          },
+          {
+            "name": "distribution",
+            "agents": ["social-media-manager"],
+            "parallel": false
+          },
+          {
+            "name": "analytics",
+            "agents": ["analytics-specialist"],
+            "parallel": false
+          }
+        ]
+      },
+      "email-sequence": {
+        "description": "Automated email drip campaign",
+        "agents": [
+          "content-strategist",
+          "copywriter",
+          "email-automation-specialist",
+          "analytics-specialist"
+        ],
+        "flow": "pipeline",
+        "stages": [
+          {
+            "name": "planning",
+            "agents": ["content-strategist"],
+            "parallel": false
+          },
+          {
+            "name": "content",
+            "agents": ["copywriter"],
+            "parallel": false
+          },
+          {
+            "name": "automation-setup",
+            "agents": ["email-automation-specialist"],
+            "parallel": false
+          },
+          {
+            "name": "monitoring",
+            "agents": ["analytics-specialist"],
+            "parallel": false
+          }
+        ]
+      },
+      "social-media-blitz": {
+        "description": "Multi-platform social media campaign",
+        "agents": [
+          "content-strategist",
+          "copywriter",
+          "social-media-manager",
+          "analytics-specialist"
+        ],
+        "flow": "parallel",
+        "concurrency": 4
+      }
+    },
+    "scaling": {
+      "auto": true,
+      "min": 3,
+      "max": 10,
+      "metrics": ["queue-depth", "response-time"]
+    },
+    "hooks": {
+      "pre-task": "npx claude-flow@alpha hooks pre-task --memory-key marketing/context",
+      "post-edit": "npx claude-flow@alpha hooks post-edit --train-neural true",
+      "post-task": "npx claude-flow@alpha hooks post-task --export-metrics true"
+    }
+  }
+}
