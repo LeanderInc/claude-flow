@@ -1,0 +1,104 @@
+{
+  "$schema": "https://claude-flow.ruv.io/schemas/workflow-v1.json",
+  "version": "1.0.0",
+  "workflow": {
+    "name": "Marketing Audit Orchestration",
+    "description": "4-stage hierarchical workflow with parallel execution in stages 2 and 3",
+    "totalDuration": "45 minutes",
+    "stages": [
+      {
+        "id": "stage-1-insights",
+        "name": "Stage 1: Customer Insights",
+        "description": "Foundation analysis of target audience and market position",
+        "duration": "5 minutes",
+        "parallelExecution": false,
+        "agents": ["customer-insights-analyst"],
+        "outputs": ["audience-analysis.json"],
+        "successCriteria": {
+          "requiredFields": ["targetAudience", "competitors", "marketPosition"],
+          "minimumScore": 0
+        }
+      },
+      {
+        "id": "stage-2-channel-analysis",
+        "name": "Stage 2: Channel Analysis (Parallel)",
+        "description": "Simultaneous analysis of SEO, CRO, and Content",
+        "duration": "8 minutes",
+        "parallelExecution": true,
+        "maxConcurrentAgents": 3,
+        "agents": ["seo-optimizer", "cro-specialist", "content-strategist"],
+        "outputs": ["seo-audit.json", "cro-audit.json", "content-audit.json"],
+        "dependencies": ["stage-1-insights"],
+        "successCriteria": {
+          "requiredAgents": 3,
+          "minimumScore": 0
+        }
+      },
+      {
+        "id": "stage-3-paid-brand",
+        "name": "Stage 3: Paid Media & Brand (Parallel)",
+        "description": "Simultaneous analysis of paid search, paid social, and brand",
+        "duration": "6 minutes",
+        "parallelExecution": true,
+        "maxConcurrentAgents": 3,
+        "agents": ["paid-search-manager", "paid-social-manager", "brand-strategist"],
+        "outputs": ["paid-search-audit.json", "paid-social-audit.json", "brand-audit.json"],
+        "dependencies": ["stage-2-channel-analysis"],
+        "successCriteria": {
+          "requiredAgents": 3,
+          "minimumScore": 0
+        }
+      },
+      {
+        "id": "stage-4-synthesis",
+        "name": "Stage 4: Report Synthesis",
+        "description": "Final analysis and report generation",
+        "duration": "7 minutes",
+        "parallelExecution": false,
+        "agents": ["analytics-specialist"],
+        "outputs": ["final-report.json", "executive-summary.json"],
+        "dependencies": ["stage-3-paid-brand"],
+        "successCriteria": {
+          "requiredFields": ["overallScore", "criticalIssues", "prioritizedRecommendations", "executiveSummary"],
+          "minimumScore": 0
+        }
+      }
+    ],
+    "memoryStrategy": {
+      "enabled": true,
+      "sessionPrefix": "marketing-audit",
+      "sharedKeys": [
+        "swarm/insights/analysis",
+        "swarm/seo/audit",
+        "swarm/cro/audit",
+        "swarm/content/audit",
+        "swarm/paid-search/audit",
+        "swarm/paid-social/audit",
+        "swarm/brand/audit"
+      ],
+      "retentionPeriod": "30 days"
+    },
+    "errorHandling": {
+      "maxRetries": 2,
+      "retryDelay": "30 seconds",
+      "fallbackStrategy": "continue-with-warnings",
+      "notificationEmail": true
+    },
+    "outputFormat": {
+      "primaryOutput": "final-report.json",
+      "intermediateOutputs": true,
+      "compressionEnabled": false,
+      "encryptionEnabled": false
+    }
+  },
+  "execution": {
+    "trigger": "api",
+    "webhook": "/api/trigger-audit",
+    "authentication": "supabase-jwt",
+    "rateLimit": {
+      "maxConcurrentAudits": 5,
+      "queueEnabled": true,
+      "priorityLevels": ["standard", "priority", "enterprise"]
+    }
+  }
+}

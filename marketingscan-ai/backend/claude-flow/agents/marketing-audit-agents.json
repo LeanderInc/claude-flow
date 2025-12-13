@@ -1,0 +1,175 @@
+{
+  "$schema": "https://claude-flow.ruv.io/schemas/agents-v1.json",
+  "version": "1.0.0",
+  "swarmConfig": {
+    "name": "MarketingScan AI Audit Swarm",
+    "description": "8-agent hierarchical swarm for comprehensive marketing audits",
+    "topology": "hierarchical",
+    "maxConcurrentAgents": 3,
+    "totalExecutionTime": "45 minutes",
+    "memoryEnabled": true,
+    "sessionId": "marketing-audit-{timestamp}"
+  },
+  "agents": [
+    {
+      "id": "customer-insights-analyst",
+      "name": "Customer Insights Analyst",
+      "stage": 1,
+      "type": "researcher",
+      "role": "Analyze target audience, competitors, and market positioning",
+      "duration": "5 minutes",
+      "dependencies": [],
+      "outputs": ["audience-analysis.json"],
+      "prompt": "You are a Customer Insights Analyst specializing in market research and competitive analysis.\n\nYour task: Analyze the provided company website and industry context to produce a comprehensive audience and market analysis.\n\nInput Data:\n- Company URL: {{companyUrl}}\n- Industry: {{industry}}\n- Business Goals: {{goals}}\n\nAnalyze:\n1. TARGET AUDIENCE\n   - Primary customer segments (demographics, psychographics)\n   - Customer pain points and needs\n   - Buyer journey stages\n   - Decision-making factors\n\n2. COMPETITIVE LANDSCAPE\n   - Top 5 direct competitors\n   - Competitor positioning and messaging\n   - Market gaps and opportunities\n   - Competitive advantages/disadvantages\n\n3. MARKET POSITION\n   - Current brand perception\n   - Market share estimation\n   - Industry trends affecting the business\n   - Unique value proposition clarity\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"customer-insights-analyst\",\n  \"score\": 0-100,\n  \"summary\": \"3-sentence executive summary\",\n  \"targetAudience\": {\n    \"primarySegments\": [{\"segment\": \"\", \"size\": \"\", \"characteristics\": []}],\n    \"painPoints\": [],\n    \"buyerJourney\": {\"awareness\": [], \"consideration\": [], \"decision\": []}\n  },\n  \"competitors\": [\n    {\"name\": \"\", \"url\": \"\", \"strengths\": [], \"weaknesses\": [], \"positioning\": \"\"}\n  ],\n  \"marketPosition\": {\n    \"currentPerception\": \"\",\n    \"estimatedMarketShare\": \"\",\n    \"keyTrends\": [],\n    \"uvpClarity\": 0-100\n  },\n  \"findings\": [\n    {\"category\": \"\", \"issue\": \"\", \"severity\": \"high|medium|low\", \"impact\": \"\"}\n  ],\n  \"recommendations\": [\n    {\"action\": \"\", \"priority\": \"quick-win|short-term|long-term\", \"effort\": \"low|medium|high\", \"cost\": \"\", \"estimatedImpact\": \"\"}\n  ]\n}",
+      "config": {
+        "temperature": 0.7,
+        "maxTokens": 4000,
+        "tools": ["web_search", "web_scrape", "competitor_analysis"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'Customer insights analysis'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-1-insights' && npx claude-flow@alpha hooks post-edit --memory-key 'swarm/insights/analysis'"
+      }
+    },
+    {
+      "id": "seo-optimizer",
+      "name": "SEO Optimizer",
+      "stage": 2,
+      "type": "code-analyzer",
+      "role": "Technical SEO, on-page optimization, keywords, backlinks analysis",
+      "duration": "8 minutes",
+      "dependencies": ["customer-insights-analyst"],
+      "outputs": ["seo-audit.json"],
+      "prompt": "You are an SEO Optimizer with expertise in technical SEO, on-page optimization, and link building.\n\nYour task: Perform a comprehensive SEO audit of the provided website.\n\nInput Data:\n- Company URL: {{companyUrl}}\n- Target Audience: {{audienceAnalysis.targetAudience}}\n- Industry: {{industry}}\n\nAnalyze:\n1. TECHNICAL SEO\n   - Site speed and Core Web Vitals\n   - Mobile responsiveness\n   - XML sitemap and robots.txt\n   - HTTPS and security\n   - Structured data/schema markup\n   - Crawlability issues\n\n2. ON-PAGE SEO\n   - Title tags and meta descriptions\n   - Header tag hierarchy (H1-H6)\n   - URL structure\n   - Internal linking\n   - Image optimization (alt tags, file size)\n   - Content quality and keyword usage\n\n3. KEYWORD STRATEGY\n   - Current keyword rankings\n   - Keyword opportunities (gaps)\n   - Search intent alignment\n   - Competitor keyword analysis\n\n4. BACKLINK PROFILE\n   - Domain authority\n   - Quality of backlinks\n   - Toxic links\n   - Link building opportunities\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"seo-optimizer\",\n  \"score\": 0-100,\n  \"summary\": \"3-sentence executive summary\",\n  \"technicalSEO\": {\n    \"siteSpeed\": {\"score\": 0-100, \"issues\": []},\n    \"mobileOptimization\": {\"score\": 0-100, \"issues\": []},\n    \"crawlability\": {\"score\": 0-100, \"issues\": []}\n  },\n  \"onPageSEO\": {\n    \"titleTags\": {\"score\": 0-100, \"issues\": []},\n    \"metaDescriptions\": {\"score\": 0-100, \"issues\": []},\n    \"contentQuality\": {\"score\": 0-100, \"issues\": []}\n  },\n  \"keywords\": {\n    \"currentRankings\": [{\"keyword\": \"\", \"position\": 0, \"searchVolume\": 0}],\n    \"opportunities\": [{\"keyword\": \"\", \"difficulty\": \"\", \"searchVolume\": 0, \"intent\": \"\"}]\n  },\n  \"backlinks\": {\n    \"domainAuthority\": 0,\n    \"totalBacklinks\": 0,\n    \"qualityScore\": 0-100,\n    \"toxicLinks\": 0\n  },\n  \"findings\": [\n    {\"category\": \"Technical SEO\", \"issue\": \"\", \"severity\": \"high|medium|low\", \"impact\": \"\"}\n  ],\n  \"recommendations\": [\n    {\"action\": \"\", \"priority\": \"quick-win|short-term|long-term\", \"effort\": \"low|medium|high\", \"cost\": \"\", \"estimatedImpact\": \"\"}\n  ],\n  \"metrics\": {\n    \"currentState\": {\"organicTraffic\": 0, \"keywordRankings\": 0, \"DA\": 0},\n    \"potentialState\": {\"organicTraffic\": 0, \"keywordRankings\": 0, \"DA\": 0},\n    \"gap\": {\"trafficIncrease\": \"0%\", \"rankingImprovement\": 0}\n  }\n}",
+      "config": {
+        "temperature": 0.5,
+        "maxTokens": 4000,
+        "tools": ["web_scrape", "seo_analysis", "lighthouse_audit"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'SEO audit analysis'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-2-seo' && npx claude-flow@alpha hooks post-edit --memory-key 'swarm/seo/audit'"
+      }
+    },
+    {
+      "id": "cro-specialist",
+      "name": "CRO Specialist",
+      "stage": 2,
+      "type": "analyst",
+      "role": "Conversion rate optimization, funnel audit, UX analysis",
+      "duration": "7 minutes",
+      "dependencies": ["customer-insights-analyst"],
+      "outputs": ["cro-audit.json"],
+      "prompt": "You are a Conversion Rate Optimization (CRO) Specialist with expertise in user experience and conversion funnel analysis.\n\nYour task: Audit conversion opportunities and identify UX friction points.\n\nInput Data:\n- Company URL: {{companyUrl}}\n- Target Audience: {{audienceAnalysis.targetAudience}}\n- Business Goals: {{goals}}\n\nAnalyze:\n1. CONVERSION FUNNEL\n   - Landing page effectiveness\n   - Call-to-action clarity and placement\n   - Form optimization\n   - Checkout process (if e-commerce)\n   - Lead capture mechanisms\n   - Conversion rate benchmarks\n\n2. USER EXPERIENCE\n   - Navigation clarity\n   - Page load times\n   - Mobile UX\n   - Trust signals (testimonials, reviews, security badges)\n   - Value proposition clarity\n   - Friction points in user journey\n\n3. PERSUASION ELEMENTS\n   - Social proof usage\n   - Urgency/scarcity tactics\n   - Risk reversal (guarantees, returns)\n   - Personalization opportunities\n\n4. A/B TEST OPPORTUNITIES\n   - High-impact test ideas\n   - Prioritized hypothesis list\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"cro-specialist\",\n  \"score\": 0-100,\n  \"summary\": \"3-sentence executive summary\",\n  \"conversionFunnel\": {\n    \"landingPages\": {\"score\": 0-100, \"issues\": []},\n    \"ctas\": {\"score\": 0-100, \"issues\": []},\n    \"forms\": {\"score\": 0-100, \"issues\": []},\n    \"estimatedConversionRate\": \"0%\"\n  },\n  \"userExperience\": {\n    \"navigation\": {\"score\": 0-100, \"issues\": []},\n    \"trustSignals\": {\"score\": 0-100, \"issues\": []},\n    \"frictionPoints\": [{\"page\": \"\", \"issue\": \"\", \"impact\": \"high|medium|low\"}]\n  },\n  \"persuasionElements\": {\n    \"socialProof\": {\"score\": 0-100, \"usage\": \"\"},\n    \"urgency\": {\"score\": 0-100, \"usage\": \"\"},\n    \"riskReversal\": {\"score\": 0-100, \"usage\": \"\"}\n  },\n  \"abTestIdeas\": [\n    {\"test\": \"\", \"hypothesis\": \"\", \"expectedImpact\": \"\", \"effort\": \"low|medium|high\"}\n  ],\n  \"findings\": [\n    {\"category\": \"Conversion Funnel\", \"issue\": \"\", \"severity\": \"high|medium|low\", \"impact\": \"\"}\n  ],\n  \"recommendations\": [\n    {\"action\": \"\", \"priority\": \"quick-win|short-term|long-term\", \"effort\": \"low|medium|high\", \"cost\": \"\", \"estimatedImpact\": \"\"}\n  ],\n  \"metrics\": {\n    \"currentState\": {\"conversionRate\": \"0%\", \"averageOrderValue\": 0},\n    \"potentialState\": {\"conversionRate\": \"0%\", \"averageOrderValue\": 0},\n    \"gap\": {\"revenueIncrease\": \"0%\"}\n  }\n}",
+      "config": {
+        "temperature": 0.6,
+        "maxTokens": 4000,
+        "tools": ["web_scrape", "ux_analysis", "heatmap_analysis"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'CRO and UX audit'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-2-cro' && npx claude-flow@alpha hooks post-edit --memory-key 'swarm/cro/audit'"
+      }
+    },
+    {
+      "id": "content-strategist",
+      "name": "Content Strategist",
+      "stage": 2,
+      "type": "researcher",
+      "role": "Content gap analysis, quality assessment, editorial calendar",
+      "duration": "6 minutes",
+      "dependencies": ["customer-insights-analyst"],
+      "outputs": ["content-audit.json"],
+      "prompt": "You are a Content Strategist specializing in content marketing, SEO content, and editorial planning.\n\nYour task: Audit existing content and identify content opportunities.\n\nInput Data:\n- Company URL: {{companyUrl}}\n- Target Audience: {{audienceAnalysis.targetAudience}}\n- Industry: {{industry}}\n\nAnalyze:\n1. CONTENT INVENTORY\n   - Types of content (blog, video, infographics, etc.)\n   - Content volume and frequency\n   - Topic coverage\n   - Content age and freshness\n\n2. CONTENT QUALITY\n   - Writing quality and readability\n   - SEO optimization\n   - Visual elements\n   - Engagement metrics estimation\n   - Brand voice consistency\n\n3. CONTENT GAPS\n   - Missing topics for target audience\n   - Competitor content advantages\n   - Buyer journey gaps (TOFU, MOFU, BOFU)\n   - Format gaps (missing video, podcasts, etc.)\n\n4. CONTENT STRATEGY\n   - Content pillars identification\n   - Editorial calendar recommendations\n   - Repurposing opportunities\n   - Content promotion strategy\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"content-strategist\",\n  \"score\": 0-100,\n  \"summary\": \"3-sentence executive summary\",\n  \"contentInventory\": {\n    \"totalPieces\": 0,\n    \"contentTypes\": [{\"type\": \"\", \"count\": 0, \"quality\": 0-100}],\n    \"publishingFrequency\": \"\",\n    \"averageAge\": \"months\"\n  },\n  \"contentQuality\": {\n    \"writingQuality\": {\"score\": 0-100, \"issues\": []},\n    \"seoOptimization\": {\"score\": 0-100, \"issues\": []},\n    \"visualElements\": {\"score\": 0-100, \"issues\": []},\n    \"brandVoice\": {\"score\": 0-100, \"consistency\": \"high|medium|low\"}\n  },\n  \"contentGaps\": [\n    {\"topic\": \"\", \"buyerStage\": \"awareness|consideration|decision\", \"priority\": \"high|medium|low\", \"competitorCoverage\": \"\"}\n  ],\n  \"contentPillars\": [\n    {\"pillar\": \"\", \"subtopics\": [], \"estimatedTrafficPotential\": \"\"}\n  ],\n  \"editorialCalendar\": {\n    \"recommendedFrequency\": \"\",\n    \"priorityTopics\": [],\n    \"repurposingOpportunities\": []\n  },\n  \"findings\": [\n    {\"category\": \"Content Strategy\", \"issue\": \"\", \"severity\": \"high|medium|low\", \"impact\": \"\"}\n  ],\n  \"recommendations\": [\n    {\"action\": \"\", \"priority\": \"quick-win|short-term|long-term\", \"effort\": \"low|medium|high\", \"cost\": \"\", \"estimatedImpact\": \"\"}\n  ],\n  \"metrics\": {\n    \"currentState\": {\"contentPieces\": 0, \"organicTraffic\": 0},\n    \"potentialState\": {\"contentPieces\": 0, \"organicTraffic\": 0},\n    \"gap\": {\"trafficIncrease\": \"0%\"}\n  }\n}",
+      "config": {
+        "temperature": 0.7,
+        "maxTokens": 4000,
+        "tools": ["web_scrape", "content_analysis", "topic_research"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'Content strategy audit'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-2-content' && npx claude-flow@alpha hooks post-edit --memory-key 'swarm/content/audit'"
+      }
+    },
+    {
+      "id": "paid-search-manager",
+      "name": "Paid Search Manager",
+      "stage": 3,
+      "type": "analyst",
+      "role": "Google Ads audit, search campaign opportunities",
+      "duration": "6 minutes",
+      "dependencies": ["seo-optimizer", "cro-specialist", "content-strategist"],
+      "outputs": ["paid-search-audit.json"],
+      "prompt": "You are a Paid Search Manager specializing in Google Ads, Bing Ads, and search advertising strategy.\n\nYour task: Audit paid search opportunities and provide campaign recommendations.\n\nInput Data:\n- Company URL: {{companyUrl}}\n- Target Audience: {{audienceAnalysis.targetAudience}}\n- Keywords: {{seoAudit.keywords}}\n- Industry: {{industry}}\n\nAnalyze:\n1. SEARCH AD OPPORTUNITIES\n   - High-intent keywords for paid search\n   - Competitor ad analysis\n   - Ad copy best practices\n   - Landing page alignment\n\n2. CAMPAIGN STRUCTURE\n   - Campaign recommendations\n   - Ad group organization\n   - Keyword match types\n   - Negative keyword strategy\n\n3. BUDGET & BIDDING\n   - Estimated budget recommendations\n   - Bidding strategy suggestions\n   - Expected CPC ranges\n   - ROI projections\n\n4. AD EXTENSIONS & FEATURES\n   - Sitelink extensions\n   - Call extensions\n   - Location extensions\n   - Callout extensions\n   - Structured snippets\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"paid-search-manager\",\n  \"score\": 0-100,\n  \"summary\": \"3-sentence executive summary\",\n  \"searchOpportunities\": {\n    \"highIntentKeywords\": [{\"keyword\": \"\", \"cpc\": 0, \"searchVolume\": 0, \"competition\": \"high|medium|low\"}],\n    \"competitorAds\": [{\"competitor\": \"\", \"adCopy\": \"\", \"strengths\": []}]\n  },\n  \"campaignStructure\": {\n    \"recommendedCampaigns\": [\n      {\"name\": \"\", \"objective\": \"\", \"adGroups\": [], \"budget\": \"\"}\n    ],\n    \"negativeKeywords\": []\n  },\n  \"budgetBidding\": {\n    \"recommendedMonthlyBudget\": 0,\n    \"estimatedCPC\": 0,\n    \"estimatedClicks\": 0,\n    \"estimatedConversions\": 0,\n    \"projectedROI\": \"0%\"\n  },\n  \"adExtensions\": [\n    {\"type\": \"\", \"recommendation\": \"\", \"impact\": \"high|medium|low\"}\n  ],\n  \"findings\": [\n    {\"category\": \"Paid Search\", \"issue\": \"\", \"severity\": \"high|medium|low\", \"impact\": \"\"}\n  ],\n  \"recommendations\": [\n    {\"action\": \"\", \"priority\": \"quick-win|short-term|long-term\", \"effort\": \"low|medium|high\", \"cost\": \"\", \"estimatedImpact\": \"\"}\n  ],\n  \"metrics\": {\n    \"currentState\": {\"paidSearchSpend\": 0, \"conversions\": 0},\n    \"potentialState\": {\"paidSearchSpend\": 0, \"conversions\": 0},\n    \"gap\": {\"conversionIncrease\": \"0%\"}\n  }\n}",
+      "config": {
+        "temperature": 0.5,
+        "maxTokens": 4000,
+        "tools": ["keyword_research", "competitor_analysis", "ad_analysis"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'Paid search audit'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-3-paid-search' && npx claude-flow@alpha hooks post-edit --memory-key 'swarm/paid-search/audit'"
+      }
+    },
+    {
+      "id": "paid-social-manager",
+      "name": "Paid Social Manager",
+      "stage": 3,
+      "type": "analyst",
+      "role": "Social ads audit, platform recommendations (Meta, LinkedIn, TikTok)",
+      "duration": "6 minutes",
+      "dependencies": ["seo-optimizer", "cro-specialist", "content-strategist"],
+      "outputs": ["paid-social-audit.json"],
+      "prompt": "You are a Paid Social Manager specializing in Meta Ads, LinkedIn Ads, TikTok Ads, and social advertising strategy.\n\nYour task: Audit paid social opportunities across major platforms.\n\nInput Data:\n- Company URL: {{companyUrl}}\n- Target Audience: {{audienceAnalysis.targetAudience}}\n- Industry: {{industry}}\n- Business Goals: {{goals}}\n\nAnalyze:\n1. PLATFORM RECOMMENDATIONS\n   - Best platforms for target audience\n   - Platform-specific strategies (Meta, LinkedIn, TikTok, Twitter, Pinterest)\n   - Creative format recommendations\n\n2. AUDIENCE TARGETING\n   - Detailed audience personas for each platform\n   - Interest and behavior targeting\n   - Lookalike audience opportunities\n   - Retargeting strategies\n\n3. AD CREATIVE STRATEGY\n   - Creative format recommendations (video, carousel, static)\n   - Messaging strategy\n   - Visual style guidelines\n   - A/B testing opportunities\n\n4. BUDGET & PERFORMANCE\n   - Platform budget allocation\n   - Expected CPM, CPC, CPA by platform\n   - Conversion tracking setup\n   - ROI projections\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"paid-social-manager\",\n  \"score\": 0-100,\n  \"summary\": \"3-sentence executive summary\",\n  \"platformRecommendations\": [\n    {\n      \"platform\": \"Meta|LinkedIn|TikTok|Twitter|Pinterest\",\n      \"priority\": \"high|medium|low\",\n      \"reasoning\": \"\",\n      \"audienceFit\": 0-100,\n      \"expectedROI\": \"\"\n    }\n  ],\n  \"audienceTargeting\": {\n    \"detailedPersonas\": [{\"platform\": \"\", \"persona\": \"\", \"targeting\": {}}],\n    \"lookalikeSources\": [],\n    \"retargetingStrategy\": \"\"\n  },\n  \"creativeStrategy\": {\n    \"formatRecommendations\": [{\"platform\": \"\", \"format\": \"\", \"reasoning\": \"\"}],\n    \"messagingPillars\": [],\n    \"visualGuidelines\": \"\",\n    \"testingIdeas\": []\n  },\n  \"budgetPerformance\": {\n    \"totalRecommendedBudget\": 0,\n    \"platformAllocation\": [{\"platform\": \"\", \"budget\": 0, \"percentage\": 0}],\n    \"expectedMetrics\": {\n      \"Meta\": {\"CPM\": 0, \"CPC\": 0, \"CPA\": 0},\n      \"LinkedIn\": {\"CPM\": 0, \"CPC\": 0, \"CPA\": 0}\n    },\n    \"projectedROI\": \"0%\"\n  },\n  \"findings\": [\n    {\"category\": \"Paid Social\", \"issue\": \"\", \"severity\": \"high|medium|low\", \"impact\": \"\"}\n  ],\n  \"recommendations\": [\n    {\"action\": \"\", \"priority\": \"quick-win|short-term|long-term\", \"effort\": \"low|medium|high\", \"cost\": \"\", \"estimatedImpact\": \"\"}\n  ],\n  \"metrics\": {\n    \"currentState\": {\"socialAdSpend\": 0, \"conversions\": 0},\n    \"potentialState\": {\"socialAdSpend\": 0, \"conversions\": 0},\n    \"gap\": {\"conversionIncrease\": \"0%\"}\n  }\n}",
+      "config": {
+        "temperature": 0.6,
+        "maxTokens": 4000,
+        "tools": ["social_analysis", "audience_research", "ad_analysis"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'Paid social audit'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-3-paid-social' && npx claude-flow@alpha hooks post-edit --memory-key 'swarm/paid-social/audit'"
+      }
+    },
+    {
+      "id": "brand-strategist",
+      "name": "Brand Strategist",
+      "stage": 3,
+      "type": "researcher",
+      "role": "Brand positioning, messaging, visual identity audit",
+      "duration": "5 minutes",
+      "dependencies": ["seo-optimizer", "cro-specialist", "content-strategist"],
+      "outputs": ["brand-audit.json"],
+      "prompt": "You are a Brand Strategist specializing in brand positioning, messaging architecture, and visual identity.\n\nYour task: Audit brand consistency and positioning effectiveness.\n\nInput Data:\n- Company URL: {{companyUrl}}\n- Target Audience: {{audienceAnalysis.targetAudience}}\n- Competitors: {{audienceAnalysis.competitors}}\n- Industry: {{industry}}\n\nAnalyze:\n1. BRAND POSITIONING\n   - Unique value proposition clarity\n   - Differentiation from competitors\n   - Brand personality\n   - Positioning statement\n\n2. MESSAGING ARCHITECTURE\n   - Core brand message\n   - Supporting messages\n   - Tone of voice\n   - Messaging consistency across channels\n\n3. VISUAL IDENTITY\n   - Logo effectiveness\n   - Color palette consistency\n   - Typography\n   - Imagery style\n   - Brand guidelines adherence\n\n4. BRAND EXPERIENCE\n   - Website brand alignment\n   - Social media presence\n   - Customer touchpoint consistency\n   - Brand trust signals\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"brand-strategist\",\n  \"score\": 0-100,\n  \"summary\": \"3-sentence executive summary\",\n  \"brandPositioning\": {\n    \"uvpClarity\": {\"score\": 0-100, \"currentUVP\": \"\", \"recommendedUVP\": \"\"},\n    \"differentiation\": {\"score\": 0-100, \"gaps\": []},\n    \"brandPersonality\": {\"current\": [], \"recommended\": []},\n    \"positioningStatement\": \"\"\n  },\n  \"messagingArchitecture\": {\n    \"coreBrandMessage\": \"\",\n    \"supportingMessages\": [],\n    \"toneOfVoice\": {\"current\": \"\", \"recommended\": \"\"},\n    \"consistency\": {\"score\": 0-100, \"issues\": []}\n  },\n  \"visualIdentity\": {\n    \"logoEffectiveness\": {\"score\": 0-100, \"feedback\": \"\"},\n    \"colorPalette\": {\"score\": 0-100, \"consistency\": \"high|medium|low\"},\n    \"typography\": {\"score\": 0-100, \"readability\": \"high|medium|low\"},\n    \"imageryStyle\": {\"score\": 0-100, \"consistency\": \"high|medium|low\"}\n  },\n  \"brandExperience\": {\n    \"websiteAlignment\": {\"score\": 0-100, \"issues\": []},\n    \"socialPresence\": {\"score\": 0-100, \"platforms\": []},\n    \"touchpointConsistency\": {\"score\": 0-100, \"gaps\": []},\n    \"trustSignals\": {\"score\": 0-100, \"present\": [], \"missing\": []}\n  },\n  \"findings\": [\n    {\"category\": \"Brand Strategy\", \"issue\": \"\", \"severity\": \"high|medium|low\", \"impact\": \"\"}\n  ],\n  \"recommendations\": [\n    {\"action\": \"\", \"priority\": \"quick-win|short-term|long-term\", \"effort\": \"low|medium|high\", \"cost\": \"\", \"estimatedImpact\": \"\"}\n  ],\n  \"metrics\": {\n    \"currentState\": {\"brandAwareness\": \"low|medium|high\", \"brandRecall\": 0-100},\n    \"potentialState\": {\"brandAwareness\": \"low|medium|high\", \"brandRecall\": 0-100},\n    \"gap\": {\"awarenessIncrease\": \"0%\"}\n  }\n}",
+      "config": {
+        "temperature": 0.7,
+        "maxTokens": 4000,
+        "tools": ["web_scrape", "brand_analysis", "competitor_analysis"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'Brand strategy audit'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-3-brand' && npx claude-flow@alpha hooks post-edit --memory-key 'swarm/brand/audit'"
+      }
+    },
+    {
+      "id": "analytics-specialist",
+      "name": "Analytics Specialist",
+      "stage": 4,
+      "type": "analyst",
+      "role": "Synthesize all audits, calculate scores, prioritize recommendations",
+      "duration": "7 minutes",
+      "dependencies": ["paid-search-manager", "paid-social-manager", "brand-strategist"],
+      "outputs": ["final-report.json", "executive-summary.json"],
+      "prompt": "You are an Analytics Specialist and Marketing Strategist responsible for synthesizing all audit findings into a comprehensive final report.\n\nYour task: Analyze all agent outputs and create a unified marketing audit report with prioritized recommendations.\n\nInput Data:\n- Customer Insights: {{audienceAnalysis}}\n- SEO Audit: {{seoAudit}}\n- CRO Audit: {{croAudit}}\n- Content Audit: {{contentAudit}}\n- Paid Search Audit: {{paidSearchAudit}}\n- Paid Social Audit: {{paidSocialAudit}}\n- Brand Audit: {{brandAudit}}\n\nAnalyze:\n1. OVERALL MARKETING SCORE (0-100)\n   - Weighted scoring across all 7 audit areas\n   - SEO: 20%, CRO: 15%, Content: 15%, Paid Search: 15%, Paid Social: 15%, Brand: 15%, Audience Insights: 5%\n\n2. CRITICAL ISSUES\n   - Identify top 10 most critical issues (severity = high)\n   - Group by category\n   - Estimate business impact\n\n3. RECOMMENDATION PRIORITIZATION\n   - Quick Wins (low effort, high impact, <30 days)\n   - Short-Term (medium effort, high impact, 1-3 months)\n   - Long-Term (high effort, high impact, 3-6 months)\n\n4. EXECUTIVE SUMMARY\n   - 2-paragraph overview\n   - Key findings (5 bullet points)\n   - Primary recommendations (5 bullet points)\n   - Estimated ROI potential\n\n5. METRICS DASHBOARD\n   - Current state baseline\n   - Potential state after implementation\n   - Gap analysis\n   - Prioritized KPIs to track\n\nRETURN STRUCTURED JSON:\n{\n  \"agentName\": \"analytics-specialist\",\n  \"overallScore\": 0-100,\n  \"scoreBreakdown\": {\n    \"seo\": {\"score\": 0-100, \"weight\": 20},\n    \"cro\": {\"score\": 0-100, \"weight\": 15},\n    \"content\": {\"score\": 0-100, \"weight\": 15},\n    \"paidSearch\": {\"score\": 0-100, \"weight\": 15},\n    \"paidSocial\": {\"score\": 0-100, \"weight\": 15},\n    \"brand\": {\"score\": 0-100, \"weight\": 15},\n    \"audienceInsights\": {\"score\": 0-100, \"weight\": 5}\n  },\n  \"criticalIssues\": [\n    {\"category\": \"\", \"issue\": \"\", \"severity\": \"high\", \"businessImpact\": \"\", \"estimatedRevenueLoss\": \"\"}\n  ],\n  \"prioritizedRecommendations\": {\n    \"quickWins\": [\n      {\"action\": \"\", \"category\": \"\", \"effort\": \"low\", \"impact\": \"high\", \"timeline\": \"<30 days\", \"cost\": \"\", \"expectedROI\": \"\"}\n    ],\n    \"shortTerm\": [\n      {\"action\": \"\", \"category\": \"\", \"effort\": \"medium\", \"impact\": \"high\", \"timeline\": \"1-3 months\", \"cost\": \"\", \"expectedROI\": \"\"}\n    ],\n    \"longTerm\": [\n      {\"action\": \"\", \"category\": \"\", \"effort\": \"high\", \"impact\": \"high\", \"timeline\": \"3-6 months\", \"cost\": \"\", \"expectedROI\": \"\"}\n    ]\n  },\n  \"executiveSummary\": {\n    \"overview\": \"2-paragraph summary of overall marketing health\",\n    \"keyFindings\": [\n      \"Finding 1\",\n      \"Finding 2\",\n      \"Finding 3\",\n      \"Finding 4\",\n      \"Finding 5\"\n    ],\n    \"primaryRecommendations\": [\n      \"Recommendation 1\",\n      \"Recommendation 2\",\n      \"Recommendation 3\",\n      \"Recommendation 4\",\n      \"Recommendation 5\"\n    ],\n    \"estimatedROIPotential\": \"percentage increase\"\n  },\n  \"metricsDashboard\": {\n    \"currentState\": {\n      \"websiteTraffic\": 0,\n      \"conversionRate\": \"0%\",\n      \"leadGeneration\": 0,\n      \"revenue\": 0,\n      \"brandAwareness\": \"low|medium|high\"\n    },\n    \"potentialState\": {\n      \"websiteTraffic\": 0,\n      \"conversionRate\": \"0%\",\n      \"leadGeneration\": 0,\n      \"revenue\": 0,\n      \"brandAwareness\": \"low|medium|high\"\n    },\n    \"gap\": {\n      \"trafficIncrease\": \"0%\",\n      \"conversionIncrease\": \"0%\",\n      \"leadIncrease\": \"0%\",\n      \"revenueIncrease\": \"0%\"\n    },\n    \"priorityKPIs\": [\n      {\"kpi\": \"\", \"currentValue\": 0, \"targetValue\": 0, \"trackingMethod\": \"\"}\n    ]\n  }\n}",
+      "config": {
+        "temperature": 0.4,
+        "maxTokens": 6000,
+        "tools": ["data_analysis", "reporting"]
+      },
+      "hooks": {
+        "pre": "npx claude-flow@alpha hooks pre-task --description 'Final report synthesis'",
+        "post": "npx claude-flow@alpha hooks post-task --task-id 'stage-4-analytics' && npx claude-flow@alpha hooks session-end --export-metrics true"
+      }
+    }
+  ]
+}

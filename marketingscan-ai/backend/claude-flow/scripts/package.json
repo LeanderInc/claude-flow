@@ -1,0 +1,31 @@
+{
+  "name": "marketingscan-ai-orchestration",
+  "version": "1.0.0",
+  "description": "MarketingScan AI - 8-agent hierarchical swarm orchestration for marketing audits",
+  "main": "run-audit.js",
+  "scripts": {
+    "audit": "node run-audit.js",
+    "test": "node test-audit.js --all",
+    "test:single": "node test-audit.js --website",
+    "validate": "node schema-validator.js",
+    "validate:dir": "node schema-validator.js --directory"
+  },
+  "keywords": [
+    "marketing",
+    "audit",
+    "ai",
+    "claude",
+    "claude-flow",
+    "swarm",
+    "orchestration"
+  ],
+  "author": "Leander Inc",
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
