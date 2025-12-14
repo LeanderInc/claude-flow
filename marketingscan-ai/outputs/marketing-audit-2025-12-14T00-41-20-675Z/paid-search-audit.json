@@ -1,0 +1,22 @@
+{
+  "agentName": "paid-search-manager",
+  "score": 82,
+  "summary": "Mock summary for Paid Search Manager",
+  "findings": [
+    {
+      "category": "Test Category",
+      "issue": "Sample issue",
+      "severity": "medium",
+      "impact": "Sample impact"
+    }
+  ],
+  "recommendations": [
+    {
+      "action": "Sample recommendation",
+      "priority": "quick-win",
+      "effort": "low",
+      "cost": "$0-500",
+      "estimatedImpact": "10% improvement"
+    }
+  ]
+}

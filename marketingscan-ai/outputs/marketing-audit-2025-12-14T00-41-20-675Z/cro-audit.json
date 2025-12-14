@@ -1,0 +1,22 @@
+{
+  "agentName": "cro-specialist",
+  "score": 61,
+  "summary": "Mock summary for CRO Specialist",
+  "findings": [
+    {
+      "category": "Test Category",
+      "issue": "Sample issue",
+      "severity": "medium",
+      "impact": "Sample impact"
+    }
+  ],
+  "recommendations": [
+    {
+      "action": "Sample recommendation",
+      "priority": "quick-win",
+      "effort": "low",
+      "cost": "$0-500",
+      "estimatedImpact": "10% improvement"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "agentName": "paid-social-manager",
+  "score": 78,
+  "summary": "Mock summary for Paid Social Manager",
+  "findings": [
+    {
+      "category": "Test Category",
+      "issue": "Sample issue",
+      "severity": "medium",
+      "impact": "Sample impact"
+    }
+  ],
+  "recommendations": [
+    {
+      "action": "Sample recommendation",
+      "priority": "quick-win",
+      "effort": "low",
+      "cost": "$0-500",
+      "estimatedImpact": "10% improvement"
+    }
+  ]
+}

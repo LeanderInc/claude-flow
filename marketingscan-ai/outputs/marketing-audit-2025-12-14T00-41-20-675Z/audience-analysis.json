@@ -1,0 +1,22 @@
+{
+  "agentName": "customer-insights-analyst",
+  "score": 84,
+  "summary": "Mock summary for Customer Insights Analyst",
+  "findings": [
+    {
+      "category": "Test Category",
+      "issue": "Sample issue",
+      "severity": "medium",
+      "impact": "Sample impact"
+    }
+  ],
+  "recommendations": [
+    {
+      "action": "Sample recommendation",
+      "priority": "quick-win",
+      "effort": "low",
+      "cost": "$0-500",
+      "estimatedImpact": "10% improvement"
+    }
+  ]
+}
