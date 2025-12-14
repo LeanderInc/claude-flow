@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketingScan AI - Marketing Audit Report</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <div class="cover-logo">{{branding.companyName}}</div>
+      <div class="cover-tagline">{{branding.tagline}}</div>
+    </div>
+
+    <div class="cover-content">
+      <h1 class="cover-title">Complete Marketing<br>Audit Report</h1>
+      <div class="cover-company">{{params.companyName}}</div>
+
+      <div class="cover-score-container">
+        <div class="cover-score-label">Overall Marketing Score</div>
+        <div class="cover-score">
+          {{overallScore}}<span class="cover-score-max">/100</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div class="cover-date">
+        <div><strong>Report Generated:</strong> {{reportDate}}</div>
+        <div><strong>Industry:</strong> {{params.industry}}</div>
+      </div>
+      <div class="cover-contact">
+        <div>{{branding.website}}</div>
+        <div>{{branding.email}}</div>
+        <div>{{branding.phone}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc page-break">
+    <h1 class="toc-title">Table of Contents</h1>
+
+    <div class="toc-item">
+      <span class="toc-item-title">Executive Summary</span>
+      <span class="toc-item-page">2</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Overall Marketing Score</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Key Opportunities & Critical Issues</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">1. Audience & Market Analysis</span>
+      <span class="toc-item-page">4</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Target Audience Insights</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Competitive Landscape</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Market Positioning</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">2. SEO Audit</span>
+      <span class="toc-item-page">10</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Technical SEO Analysis</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">On-Page Optimization</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Keyword Opportunities</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">3. Conversion Rate Optimization</span>
+      <span class="toc-item-page">18</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Funnel Analysis</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">UX/UI Assessment</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">4. Content Strategy</span>
+      <span class="toc-item-page">25</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Content Quality Assessment</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Content Gap Analysis</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">5. Paid Search Analysis</span>
+      <span class="toc-item-page">31</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">6. Paid Social Analysis</span>
+      <span class="toc-item-page">36</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">7. Brand & Messaging Audit</span>
+      <span class="toc-item-page">41</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">8. Prioritized Action Plan</span>
+      <span class="toc-item-page">46</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Quick Wins (0-30 days)</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Short-Term (1-3 months)</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Long-Term (3-6 months)</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Investment Summary & ROI Projections</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="executive-summary">
+    <div class="summary-header">
+      <h1 class="summary-title">Executive Summary</h1>
+      <p class="summary-subtitle">A comprehensive analysis of {{params.companyName}}'s marketing performance across 7 key channels</p>
+    </div>
+
+    <h2>Overall Marketing Score</h2>
+    <div class="score-breakdown">
+      {{#each scoreBreakdown}}
+      <div class="score-card">
+        <div class="score-card-label">{{this.label}}</div>
+        <div class="score-card-value">{{this.score}}<span class="score-card-max">/100</span></div>
+      </div>
+      {{/each}}
+    </div>
+
+    <h2>Top 3 Critical Issues</h2>
+    <div class="key-findings">
+      {{#each criticalIssues}}
+      <div class="finding-item">
+        <div class="finding-header">
+          <div class="finding-title">{{this.issue}}</div>
+          <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+        </div>
+        <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+        <p class="finding-description"><strong>Impact:</strong> {{this.impact}}</p>
+      </div>
+      {{/each}}
+    </div>
+
+    <h2>Top 3 Opportunities</h2>
+    <div class="key-findings">
+      {{#each topOpportunities}}
+      <div class="opportunity-item">
+        <div class="finding-header">
+          <div class="finding-title">{{this.action}}</div>
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+        </div>
+        <div class="recommendation-details">
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Effort:</span>
+            <span class="recommendation-detail-value">{{this.effort}}</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Cost:</span>
+            <span class="recommendation-detail-value">{{this.cost}}</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Impact:</span>
+            <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <!-- SECTION 1: AUDIENCE & MARKET ANALYSIS -->
+  <div class="page-break">
+    <h1>1. Audience & Market Analysis</h1>
+    <p><strong>Score:</strong> <span class="text-primary">{{audienceScore}}/100</span></p>
+
+    <h2>Summary</h2>
+    <p>{{audienceData.summary}}</p>
+
+    <h2>Key Findings</h2>
+    {{#each audienceData.findings}}
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">{{this.issue}}</div>
+        <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+      <p class="finding-description">{{this.impact}}</p>
+    </div>
+    {{/each}}
+
+    <h2>Recommendations</h2>
+    {{#each audienceData.recommendations}}
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">{{this.action}}</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+          <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">{{this.cost}}</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- SECTION 2: SEO AUDIT -->
+  <div class="page-break">
+    <h1>2. SEO Audit</h1>
+    <p><strong>Score:</strong> <span class="text-primary">{{seoScore}}/100</span></p>
+
+    <h2>Summary</h2>
+    <p>{{seoData.summary}}</p>
+
+    <h3>Technical SEO</h3>
+    <p>Our analysis reveals several critical technical optimizations needed to improve search engine visibility and crawlability.</p>
+
+    <h2>Key Findings</h2>
+    {{#each seoData.findings}}
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">{{this.issue}}</div>
+        <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+      <p class="finding-description">{{this.impact}}</p>
+    </div>
+    {{/each}}
+
+    <h2>Recommendations</h2>
+    {{#each seoData.recommendations}}
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">{{this.action}}</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+          <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">{{this.cost}}</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- SECTION 3: CONVERSION RATE OPTIMIZATION -->
+  <div class="page-break">
+    <h1>3. Conversion Rate Optimization</h1>
+    <p><strong>Score:</strong> <span class="text-primary">{{croScore}}/100</span></p>
+
+    <h2>Summary</h2>
+    <p>{{croData.summary}}</p>
+
+    <h2>Key Findings</h2>
+    {{#each croData.findings}}
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">{{this.issue}}</div>
+        <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+      <p class="finding-description">{{this.impact}}</p>
+    </div>
+    {{/each}}
+
+    <h2>Recommendations</h2>
+    {{#each croData.recommendations}}
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">{{this.action}}</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+          <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">{{this.cost}}</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- SECTION 4: CONTENT STRATEGY -->
+  <div class="page-break">
+    <h1>4. Content Strategy</h1>
+    <p><strong>Score:</strong> <span class="text-primary">{{contentScore}}/100</span></p>
+
+    <h2>Summary</h2>
+    <p>{{contentData.summary}}</p>
+
+    <h2>Key Findings</h2>
+    {{#each contentData.findings}}
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">{{this.issue}}</div>
+        <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+      <p class="finding-description">{{this.impact}}</p>
+    </div>
+    {{/each}}
+
+    <h2>Recommendations</h2>
+    {{#each contentData.recommendations}}
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">{{this.action}}</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+          <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">{{this.cost}}</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- SECTION 5: PAID SEARCH ANALYSIS -->
+  <div class="page-break">
+    <h1>5. Paid Search Analysis</h1>
+    <p><strong>Score:</strong> <span class="text-primary">{{paidSearchScore}}/100</span></p>
+
+    <h2>Summary</h2>
+    <p>{{paidSearchData.summary}}</p>
+
+    <h2>Key Findings</h2>
+    {{#each paidSearchData.findings}}
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">{{this.issue}}</div>
+        <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+      <p class="finding-description">{{this.impact}}</p>
+    </div>
+    {{/each}}
+
+    <h2>Recommendations</h2>
+    {{#each paidSearchData.recommendations}}
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">{{this.action}}</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+          <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">{{this.cost}}</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- SECTION 6: PAID SOCIAL ANALYSIS -->
+  <div class="page-break">
+    <h1>6. Paid Social Analysis</h1>
+    <p><strong>Score:</strong> <span class="text-primary">{{paidSocialScore}}/100</span></p>
+
+    <h2>Summary</h2>
+    <p>{{paidSocialData.summary}}</p>
+
+    <h2>Key Findings</h2>
+    {{#each paidSocialData.findings}}
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">{{this.issue}}</div>
+        <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+      <p class="finding-description">{{this.impact}}</p>
+    </div>
+    {{/each}}
+
+    <h2>Recommendations</h2>
+    {{#each paidSocialData.recommendations}}
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">{{this.action}}</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+          <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">{{this.cost}}</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- SECTION 7: BRAND & MESSAGING AUDIT -->
+  <div class="page-break">
+    <h1>7. Brand & Messaging Audit</h1>
+    <p><strong>Score:</strong> <span class="text-primary">{{brandScore}}/100</span></p>
+
+    <h2>Summary</h2>
+    <p>{{brandData.summary}}</p>
+
+    <h2>Key Findings</h2>
+    {{#each brandData.findings}}
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">{{this.issue}}</div>
+        <span class="severity-badge severity-{{this.severity}}">{{this.severity}}</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> {{this.category}}</p>
+      <p class="finding-description">{{this.impact}}</p>
+    </div>
+    {{/each}}
+
+    <h2>Recommendations</h2>
+    {{#each brandData.recommendations}}
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">{{this.action}}</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-{{this.priority}}">{{this.priority}}</span>
+          <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">{{this.cost}}</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- SECTION 8: PRIORITIZED ACTION PLAN -->
+  <div class="page-break">
+    <h1>8. Prioritized Action Plan</h1>
+    <p>Based on our comprehensive audit, we've organized all recommendations into a prioritized action plan. Each initiative is categorized by timeline, effort, cost, and expected ROI.</p>
+
+    <div class="action-plan">
+      <!-- QUICK WINS (0-30 days) -->
+      <div class="action-phase">
+        <div class="action-phase-header">
+          <div class="action-phase-title">Quick Wins (0-30 days)</div>
+          <div class="action-phase-subtitle">Low effort, high impact initiatives to implement immediately</div>
+        </div>
+        <div class="action-items">
+          {{#each actionPlan.quickWins}}
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">{{this.action}}</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>{{this.category}}</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">{{this.cost}}</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- SHORT-TERM (1-3 months) -->
+      <div class="action-phase">
+        <div class="action-phase-header">
+          <div class="action-phase-title">Short-Term (1-3 months)</div>
+          <div class="action-phase-subtitle">Medium effort initiatives for sustained growth</div>
+        </div>
+        <div class="action-items">
+          {{#each actionPlan.shortTerm}}
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">{{this.action}}</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>{{this.category}}</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">{{this.cost}}</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- LONG-TERM (3-6 months) -->
+      <div class="action-phase">
+        <div class="action-phase-header">
+          <div class="action-phase-title">Long-Term (3-6 months)</div>
+          <div class="action-phase-subtitle">Strategic initiatives for market leadership</div>
+        </div>
+        <div class="action-items">
+          {{#each actionPlan.longTerm}}
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">{{this.action}}</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-{{this.effort}}">{{this.effort}} effort</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>{{this.category}}</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">{{this.cost}}</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">{{this.estimatedImpact}}</span>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <!-- INVESTMENT SUMMARY -->
+    <div class="investment-summary">
+      <div class="investment-header">
+        <div class="investment-title">Investment Summary & ROI Projections</div>
+      </div>
+      <div class="investment-stats">
+        <div class="investment-stat">
+          <div class="investment-stat-label">Total Investment</div>
+          <div class="investment-stat-value">{{investmentSummary.totalInvestment}}</div>
+        </div>
+        <div class="investment-stat">
+          <div class="investment-stat-label">Estimated ROI</div>
+          <div class="investment-stat-value">{{investmentSummary.estimatedROI}}</div>
+        </div>
+        <div class="investment-stat">
+          <div class="investment-stat-label">Payback Period</div>
+          <div class="investment-stat-value">{{investmentSummary.paybackPeriod}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALL TO ACTION -->
+  <div class="cta-section page-break">
+    <h2 class="cta-title">Ready to Transform Your Marketing?</h2>
+    <p class="cta-description">
+      Our team of marketing experts is ready to help you implement these recommendations and achieve measurable results.
+      Book a free 30-minute strategy call to discuss your unique situation and create a customized implementation roadmap.
+    </p>
+    <div class="cta-button">📅 Book Your Free Strategy Call</div>
+    <div class="cta-contact">
+      {{branding.website}} • {{branding.email}} • {{branding.phone}}
+    </div>
+  </div>
+
+  <!-- FINAL PAGE -->
+  <div class="cover-page">
+    <div class="cover-content" style="justify-content: center; text-align: center;">
+      <div class="cover-logo" style="margin-bottom: 40px;">{{branding.companyName}}</div>
+      <div style="font-size: 18pt; margin-bottom: 32px; opacity: 0.9;">
+        Thank you for choosing {{branding.companyName}}
+      </div>
+      <div style="font-size: 14pt; opacity: 0.8; margin-bottom: 40px;">
+        We're committed to helping {{params.companyName}}<br>
+        achieve exceptional marketing results.
+      </div>
+      <div style="font-size: 12pt; opacity: 0.7;">
+        For questions about this report, contact:<br>
+        <strong>{{branding.email}}</strong>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
