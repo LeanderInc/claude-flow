@@ -1,0 +1,50 @@
+{
+  "branding": {
+    "companyName": "MarketingScan AI",
+    "tagline": "AI-Powered Marketing Intelligence",
+    "website": "https://marketingscan.ai",
+    "email": "hello@leander.inc",
+    "phone": "+1 (555) 123-4567",
+    "logo": {
+      "url": "https://via.placeholder.com/300x80/4F46E5/FFFFFF?text=MarketingScan+AI",
+      "width": 300,
+      "height": 80
+    }
+  },
+  "colors": {
+    "primary": "#4F46E5",
+    "secondary": "#06B6D4",
+    "success": "#10B981",
+    "warning": "#F59E0B",
+    "danger": "#EF4444",
+    "dark": "#1F2937",
+    "light": "#F3F4F6",
+    "white": "#FFFFFF",
+    "text": {
+      "primary": "#111827",
+      "secondary": "#6B7280",
+      "light": "#9CA3AF"
+    }
+  },
+  "fonts": {
+    "heading": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "body": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "monospace": "'Fira Code', 'Courier New', monospace"
+  },
+  "report": {
+    "targetPages": 45,
+    "includeCharts": true,
+    "includeMetrics": true,
+    "includeActionPlan": true,
+    "colorCodeSeverity": true
+  },
+  "pricing": {
+    "standardAudit": 197,
+    "priorityAudit": 297,
+    "enterpriseAudit": 497
+  },
+  "contact": {
+    "bookingUrl": "https://calendly.com/leander-inc/strategy-call",
+    "supportEmail": "support@leander.inc"
+  }
+}
