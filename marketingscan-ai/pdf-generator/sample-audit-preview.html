@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketingScan AI - Marketing Audit Report - Anthropic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #4F46E5;
+      --color-secondary: #06B6D4;
+      --color-success: #10B981;
+      --color-warning: #F59E0B;
+      --color-danger: #EF4444;
+      --color-dark: #1F2937;
+      --color-light: #F3F4F6;
+      --color-white: #FFFFFF;
+      --color-text-primary: #111827;
+      --color-text-secondary: #6B7280;
+      --color-text-light: #9CA3AF;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: white;
+    }
+
+    /* Page Setup */
+    @page {
+      size: A4;
+      margin: 25mm 20mm;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, var(--color-primary) 0%, #6366F1 100%);
+      color: white;
+      padding: 80px 60px;
+      page-break-after: always;
+    }
+
+    .cover-header {
+      text-align: center;
+    }
+
+    .cover-logo {
+      font-size: 36pt;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .cover-tagline {
+      font-size: 14pt;
+      font-weight: 400;
+      opacity: 0.9;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .cover-content {
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .cover-title {
+      font-size: 48pt;
+      font-weight: 800;
+      margin-bottom: 40px;
+      line-height: 1.2;
+      letter-spacing: -2px;
+    }
+
+    .cover-company {
+      font-size: 32pt;
+      font-weight: 600;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .cover-score-container {
+      margin: 60px 0;
+    }
+
+    .cover-score-label {
+      font-size: 14pt;
+      font-weight: 500;
+      opacity: 0.8;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cover-score {
+      font-size: 120pt;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -4px;
+    }
+
+    .cover-score-max {
+      font-size: 32pt;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 11pt;
+      opacity: 0.9;
+    }
+
+    .cover-date {
+      font-weight: 500;
+    }
+
+    .cover-contact {
+      text-align: right;
+    }
+
+    .cover-contact div {
+      margin-bottom: 4px;
+    }
+
+    /* Section Headers */
+    h1 {
+      font-size: 28pt;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin: 40px 0 24px 0;
+      letter-spacing: -1px;
+      page-break-after: avoid;
+    }
+
+    h2 {
+      font-size: 20pt;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin: 32px 0 16px 0;
+      letter-spacing: -0.5px;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin: 24px 0 12px 0;
+      page-break-after: avoid;
+    }
+
+    /* Executive Summary */
+    .executive-summary {
+      page-break-after: always;
+      padding: 40px 0;
+    }
+
+    .summary-header {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #6366F1 100%);
+      color: white;
+      padding: 32px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+
+    .summary-title {
+      font-size: 32pt;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .summary-subtitle {
+      font-size: 14pt;
+      opacity: 0.9;
+    }
+
+    .score-breakdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .score-card {
+      background: var(--color-light);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .score-card-label {
+      font-size: 10pt;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .score-card-value {
+      font-size: 32pt;
+      font-weight: 800;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .score-card-max {
+      font-size: 14pt;
+      color: var(--color-text-light);
+    }
+
+    /* Key Findings */
+    .key-findings {
+      margin: 32px 0;
+    }
+
+    .finding-item,
+    .opportunity-item {
+      background: white;
+      border: 1px solid #E5E7EB;
+      border-left: 4px solid var(--color-primary);
+      padding: 20px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      page-break-inside: avoid;
+    }
+
+    .finding-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .finding-title {
+      font-size: 12pt;
+      font-weight: 600;
+      color: var(--color-dark);
+    }
+
+    .severity-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 9pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .severity-high {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .severity-medium {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .severity-low {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+
+    .finding-description {
+      font-size: 10pt;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Recommendations */
+    .recommendation-item {
+      background: white;
+      border: 1px solid #E5E7EB;
+      padding: 20px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      page-break-inside: avoid;
+    }
+
+    .recommendation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .recommendation-title {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--color-dark);
+      flex: 1;
+    }
+
+    .recommendation-meta {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .priority-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 8pt;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .priority-quick-win {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+
+    .priority-short-term {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+
+    .priority-long-term {
+      background: #E0E7FF;
+      color: #3730A3;
+    }
+
+    .effort-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 8pt;
+      font-weight: 600;
+    }
+
+    .effort-low {
+      background: #F3F4F6;
+      color: #374151;
+    }
+
+    .effort-medium {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .effort-high {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .recommendation-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+      font-size: 9pt;
+    }
+
+    .recommendation-detail {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .recommendation-detail-label {
+      font-weight: 600;
+      color: var(--color-text-secondary);
+    }
+
+    .recommendation-detail-value {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* Table of Contents */
+    .toc {
+      page-break-after: always;
+      padding: 40px 0;
+    }
+
+    .toc-title {
+      font-size: 32pt;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 32px;
+    }
+
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-light);
+      font-size: 11pt;
+    }
+
+    .toc-item-title {
+      font-weight: 500;
+      color: var(--color-dark);
+    }
+
+    .toc-item-page {
+      color: var(--color-text-light);
+    }
+
+    .toc-section {
+      margin-left: 20px;
+      font-size: 10pt;
+    }
+
+    /* Action Plan */
+    .action-plan {
+      margin: 32px 0;
+    }
+
+    .action-phase {
+      margin-bottom: 40px;
+      page-break-inside: avoid;
+    }
+
+    .action-phase-header {
+      background: var(--color-primary);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px 8px 0 0;
+      margin-bottom: 0;
+    }
+
+    .action-phase-title {
+      font-size: 16pt;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .action-phase-subtitle {
+      font-size: 10pt;
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+
+    .action-items {
+      border: 1px solid var(--color-light);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .action-item {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-light);
+    }
+
+    .action-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Investment Summary */
+    .investment-summary {
+      background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+      padding: 32px;
+      border-radius: 12px;
+      margin: 32px 0;
+      page-break-inside: avoid;
+    }
+
+    .investment-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .investment-title {
+      font-size: 20pt;
+      font-weight: 700;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+
+    .investment-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .investment-stat {
+      text-align: center;
+    }
+
+    .investment-stat-label {
+      font-size: 10pt;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .investment-stat-value {
+      font-size: 32pt;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #6366F1 100%);
+      color: white;
+      padding: 40px;
+      border-radius: 12px;
+      margin: 40px 0;
+      text-align: center;
+      page-break-inside: avoid;
+    }
+
+    .cta-title {
+      font-size: 24pt;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .cta-description {
+      font-size: 12pt;
+      opacity: 0.9;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: var(--color-primary);
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 12pt;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 16px;
+    }
+
+    .cta-contact {
+      font-size: 10pt;
+      opacity: 0.8;
+    }
+
+    /* Utilities */
+    .page-break {
+      page-break-after: always;
+    }
+
+    .text-primary {
+      color: var(--color-primary);
+    }
+
+    @media print {
+      .cover-page {
+        height: 100vh;
+      }
+      .page-break {
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <div class="cover-logo">MarketingScan AI</div>
+      <div class="cover-tagline">AI-POWERED MARKETING INTELLIGENCE</div>
+    </div>
+
+    <div class="cover-content">
+      <h1 class="cover-title">Complete Marketing<br>Audit Report</h1>
+      <div class="cover-company">Anthropic</div>
+
+      <div class="cover-score-container">
+        <div class="cover-score-label">Overall Marketing Score</div>
+        <div class="cover-score">
+          73<span class="cover-score-max">/100</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div class="cover-date">
+        <div><strong>Report Generated:</strong> December 16, 2025</div>
+        <div><strong>Industry:</strong> AI/Technology</div>
+      </div>
+      <div class="cover-contact">
+        <div>https://marketingscan.ai</div>
+        <div>hello@leander.inc</div>
+        <div>+1 (555) 123-4567</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc page-break">
+    <h1 class="toc-title">Table of Contents</h1>
+
+    <div class="toc-item">
+      <span class="toc-item-title">Executive Summary</span>
+      <span class="toc-item-page">2</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Overall Marketing Score</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Key Opportunities & Critical Issues</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">1. Audience & Market Analysis</span>
+      <span class="toc-item-page">4</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Target Audience Insights</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Competitive Landscape</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Market Positioning</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">2. SEO Audit</span>
+      <span class="toc-item-page">10</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Technical SEO Analysis</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">On-Page Optimization</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Keyword Opportunities</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">3. Conversion Rate Optimization</span>
+      <span class="toc-item-page">18</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Funnel Analysis</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">UX/UI Assessment</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">4. Content Strategy</span>
+      <span class="toc-item-page">25</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Content Quality Assessment</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Content Gap Analysis</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">5. Paid Search Analysis</span>
+      <span class="toc-item-page">31</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">6. Paid Social Analysis</span>
+      <span class="toc-item-page">36</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">7. Brand & Messaging Audit</span>
+      <span class="toc-item-page">41</span>
+    </div>
+
+    <div class="toc-item">
+      <span class="toc-item-title">8. Prioritized Action Plan</span>
+      <span class="toc-item-page">46</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Quick Wins (0-30 days)</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Short-Term (1-3 months)</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Long-Term (3-6 months)</span>
+    </div>
+    <div class="toc-item toc-section">
+      <span class="toc-item-title">Investment Summary & ROI Projections</span>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="executive-summary">
+    <div class="summary-header">
+      <h1 class="summary-title">Executive Summary</h1>
+      <p class="summary-subtitle">A comprehensive analysis of Anthropic's marketing performance across 7 key channels</p>
+    </div>
+
+    <h2>Overall Marketing Score</h2>
+    <div class="score-breakdown">
+      <div class="score-card">
+        <div class="score-card-label">SEO</div>
+        <div class="score-card-value">61<span class="score-card-max">/100</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Conversion</div>
+        <div class="score-card-value">61<span class="score-card-max">/100</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Content</div>
+        <div class="score-card-value">88<span class="score-card-max">/100</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Paid Search</div>
+        <div class="score-card-value">82<span class="score-card-max">/100</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Paid Social</div>
+        <div class="score-card-value">78<span class="score-card-max">/100</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Brand</div>
+        <div class="score-card-value">61<span class="score-card-max">/100</span></div>
+      </div>
+      <div class="score-card">
+        <div class="score-card-label">Audience</div>
+        <div class="score-card-value">84<span class="score-card-max">/100</span></div>
+      </div>
+    </div>
+
+    <h2>Top 3 Critical Issues</h2>
+    <div class="key-findings">
+      <div class="finding-item">
+        <div class="finding-header">
+          <div class="finding-title">SEO technical optimization needed for organic growth</div>
+          <span class="severity-badge severity-high">HIGH</span>
+        </div>
+        <p class="finding-description"><strong>Category:</strong> Technical SEO</p>
+        <p class="finding-description"><strong>Impact:</strong> Missing 40% of potential organic traffic due to technical issues including slow page speed, missing structured data, and mobile optimization gaps.</p>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-header">
+          <div class="finding-title">Conversion funnel drop-off at trial signup stage</div>
+          <span class="severity-badge severity-high">HIGH</span>
+        </div>
+        <p class="finding-description"><strong>Category:</strong> Conversion Optimization</p>
+        <p class="finding-description"><strong>Impact:</strong> 65% of users abandon signup flow, representing $2.3M in annual lost revenue opportunity.</p>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-header">
+          <div class="finding-title">Limited brand differentiation in competitive AI market</div>
+          <span class="severity-badge severity-medium">MEDIUM</span>
+        </div>
+        <p class="finding-description"><strong>Category:</strong> Brand Strategy</p>
+        <p class="finding-description"><strong>Impact:</strong> Generic messaging reduces memorability and makes it harder to justify premium pricing vs. competitors.</p>
+      </div>
+    </div>
+
+    <h2>Top 3 Opportunities</h2>
+    <div class="key-findings">
+      <div class="opportunity-item">
+        <div class="finding-header">
+          <div class="finding-title">Implement schema markup for rich snippets</div>
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+        </div>
+        <div class="recommendation-details">
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Effort:</span>
+            <span class="recommendation-detail-value">Low</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Cost:</span>
+            <span class="recommendation-detail-value">$500-1,500</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Impact:</span>
+            <span class="recommendation-detail-value">25-35% CTR improvement</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="opportunity-item">
+        <div class="finding-header">
+          <div class="finding-title">Add social proof to trial signup page</div>
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+        </div>
+        <div class="recommendation-details">
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Effort:</span>
+            <span class="recommendation-detail-value">Low</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Cost:</span>
+            <span class="recommendation-detail-value">$1,000-2,500</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Impact:</span>
+            <span class="recommendation-detail-value">18-25% conversion lift</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="opportunity-item">
+        <div class="finding-header">
+          <div class="finding-title">Launch thought leadership content series</div>
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+        </div>
+        <div class="recommendation-details">
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Effort:</span>
+            <span class="recommendation-detail-value">Medium</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Cost:</span>
+            <span class="recommendation-detail-value">$5,000-10,000</span>
+          </div>
+          <div class="recommendation-detail">
+            <span class="recommendation-detail-label">Impact:</span>
+            <span class="recommendation-detail-value">40% brand awareness increase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: AUDIENCE & MARKET ANALYSIS -->
+  <div class="page-break">
+    <h1>1. Audience & Market Analysis</h1>
+    <p><strong>Score:</strong> <span class="text-primary">84/100</span></p>
+
+    <h2>Summary</h2>
+    <p>Anthropic has strong audience understanding with clear targeting of enterprise AI developers and technical decision-makers. However, there are opportunities to expand reach into adjacent segments including SMB developers, academic researchers, and AI enthusiasts. The competitive landscape analysis reveals strong positioning against OpenAI and Google, but messaging could be more differentiated.</p>
+
+    <h3>Target Audience Insights</h3>
+    <p>Primary audience segments include enterprise software engineers (45%), AI/ML researchers (30%), technical product managers (15%), and C-suite decision-makers (10%). Current messaging resonates well with technical users but may be too complex for executive buyers.</p>
+
+    <h2>Key Findings</h2>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Strong resonance with technical AI developers</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Audience Targeting</p>
+      <p class="finding-description">Documentation and technical resources attract high-intent developers. API-first messaging aligns well with developer preferences and drives 73% of inbound traffic.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Limited penetration in SMB market segment</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Market Expansion</p>
+      <p class="finding-description">Only 12% of leads come from SMB segment despite representing 60% of potential market. Pricing and positioning perceived as enterprise-only.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Academic researcher segment shows strong organic interest</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Audience Insights</p>
+      <p class="finding-description">15% of organic traffic comes from .edu domains. Opportunity to nurture future enterprise decision-makers through academic partnerships.</p>
+    </div>
+
+    <h2>Recommendations</h2>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Create SMB-focused landing pages and pricing tiers</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$8,000-15,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">35% increase in SMB conversions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Launch academic research partnership program</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-long-term">LONG-TERM</span>
+          <span class="effort-badge effort-high">HIGH EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$25,000-50,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">50% brand awareness in academia</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Develop executive-focused messaging and case studies</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-low">LOW EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$3,000-7,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">22% lift in enterprise deals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: SEO AUDIT -->
+  <div class="page-break">
+    <h1>2. SEO Audit</h1>
+    <p><strong>Score:</strong> <span class="text-primary">61/100</span></p>
+
+    <h2>Summary</h2>
+    <p>SEO performance is currently below industry benchmarks for enterprise SaaS companies. While the site has strong domain authority (DA: 78) and quality backlinks, technical issues are limiting organic visibility. Core Web Vitals need improvement, with LCP at 4.2s (target: <2.5s) and CLS at 0.18 (target: <0.1). Mobile optimization scores 68/100, leaving significant room for improvement.</p>
+
+    <h3>Technical SEO</h3>
+    <p>Site crawlability is generally good with proper robots.txt and XML sitemaps. However, JavaScript rendering issues on documentation pages prevent Google from indexing 23% of technical content. Page speed optimization is critical - current average load time of 3.8s vs. industry target of <2s.</p>
+
+    <h2>Key Findings</h2>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Missing structured data markup across key pages</div>
+        <span class="severity-badge severity-high">HIGH</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Technical SEO</p>
+      <p class="finding-description">No schema.org markup for products, FAQs, or articles. Missing out on rich snippets which could improve CTR by 25-35% and increase visibility in voice search results.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Page speed issues impacting mobile rankings</div>
+        <span class="severity-badge severity-high">HIGH</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Performance</p>
+      <p class="finding-description">Mobile page speed score of 48/100. Largest Contentful Paint (LCP) of 4.2 seconds exceeds Google's threshold of 2.5s. Estimated 15% traffic loss due to slow mobile experience.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Strong backlink profile with quality domains</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Off-Page SEO</p>
+      <p class="finding-description">1,247 referring domains including high-authority tech publications. 89% of backlinks are follow links. Domain authority of 78 puts Anthropic in top 10% of tech companies.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Documentation pages have indexing issues</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Technical SEO</p>
+      <p class="finding-description">JavaScript-heavy documentation prevents 23% of pages from being properly indexed. Google Search Console shows 89 "Discovered - currently not indexed" errors.</p>
+    </div>
+
+    <h2>Recommendations</h2>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Implement comprehensive schema markup</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-low">LOW EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$500-1,500</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">25-35% CTR improvement</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Optimize Core Web Vitals and page speed</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-high">HIGH EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$15,000-30,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">40% improvement in mobile traffic</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Implement server-side rendering for documentation</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-high">HIGH EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$20,000-40,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">60% increase in indexed docs pages</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Create targeted content for high-volume AI keywords</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-long-term">LONG-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$12,000-25,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">75% increase in organic traffic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: CONVERSION RATE OPTIMIZATION -->
+  <div class="page-break">
+    <h1>3. Conversion Rate Optimization</h1>
+    <p><strong>Score:</strong> <span class="text-primary">61/100</span></p>
+
+    <h2>Summary</h2>
+    <p>Conversion funnel analysis reveals significant drop-off points that are costing an estimated $2.3M annually in lost revenue. The homepage-to-trial conversion rate of 2.1% is below the enterprise SaaS benchmark of 3.5-5%. Exit analysis shows 65% of users abandon the signup flow at the API key creation step, suggesting friction in the onboarding process. However, users who complete signup have strong activation rates (78% within 7 days).</p>
+
+    <h2>Key Findings</h2>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">High abandonment at trial signup step</div>
+        <span class="severity-badge severity-high">HIGH</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Funnel Optimization</p>
+      <p class="finding-description">65% of users who start signup flow abandon before completion. Primary friction point is API key creation screen which lacks context and guidance. Form requires 8 fields vs. industry average of 3-4.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Limited social proof on conversion pages</div>
+        <span class="severity-badge severity-high">HIGH</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Trust & Credibility</p>
+      <p class="finding-description">Signup and pricing pages lack customer testimonials, case studies, or trust badges. Adding social proof could increase conversion rate by 18-25% based on industry benchmarks.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Strong post-signup activation rate</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> User Onboarding</p>
+      <p class="finding-description">78% of users who complete signup make their first API call within 7 days. This indicates strong product-market fit once users get past the signup barrier.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Mobile conversion rate significantly lower</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Mobile Experience</p>
+      <p class="finding-description">Mobile conversion rate is 0.8% vs. desktop 3.2%. Mobile signup form is not optimized for small screens and lacks autofill support.</p>
+    </div>
+
+    <h2>Recommendations</h2>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Simplify trial signup flow to 3 steps</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$5,000-10,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">45% increase in signup completion</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Add customer testimonials and trust badges</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-low">LOW EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$1,000-2,500</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">18-25% conversion lift</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Optimize mobile signup experience</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$8,000-15,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">200% improvement in mobile conversions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Implement exit-intent popup with value proposition</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-low">LOW EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$500-1,500</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">12% reduction in bounce rate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: CONTENT STRATEGY -->
+  <div class="page-break">
+    <h1>4. Content Strategy</h1>
+    <p><strong>Score:</strong> <span class="text-primary">88/100</span></p>
+
+    <h2>Summary</h2>
+    <p>Content strategy is the strongest performing area with high-quality technical documentation and thought leadership pieces. The blog receives 45,000 monthly organic visitors with an average time-on-page of 4:32 (industry average: 2:15). However, content production frequency is inconsistent (averaging 2 posts/month vs. recommended 8-12), and there are gaps in bottom-of-funnel content targeting commercial intent keywords.</p>
+
+    <h2>Key Findings</h2>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">High-quality technical content drives strong engagement</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Content Quality</p>
+      <p class="finding-description">Documentation and tutorials have 4.7/5 average rating from users. Technical depth and accuracy create strong brand trust and position Anthropic as thought leaders in safe AI.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Inconsistent content publishing schedule</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Content Operations</p>
+      <p class="finding-description">Publishing only 2 blog posts per month vs. recommended 8-12 for enterprise SaaS. Inconsistent cadence makes it hard to build audience momentum and reduces SEO impact.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Missing bottom-of-funnel commercial content</div>
+        <span class="severity-badge severity-high">HIGH</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Content Gaps</p>
+      <p class="finding-description">90% of content is educational/top-of-funnel. Missing comparison guides, ROI calculators, and implementation case studies that drive bottom-funnel conversions.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Strong video content performance on YouTube</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Video Strategy</p>
+      <p class="finding-description">Technical tutorial videos have 85K average views with 12-minute average watch time. Video content drives 2.4x higher engagement than text-only posts.</p>
+    </div>
+
+    <h2>Recommendations</h2>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Create comparison content targeting commercial keywords</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$8,000-15,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">35% increase in demo requests</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Establish consistent 8-12 posts/month publishing cadence</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-long-term">LONG-TERM</span>
+          <span class="effort-badge effort-high">HIGH EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$20,000-40,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">120% increase in organic traffic</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Launch thought leadership video series</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$5,000-10,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">40% brand awareness increase</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: PAID SEARCH ANALYSIS -->
+  <div class="page-break">
+    <h1>5. Paid Search Analysis</h1>
+    <p><strong>Score:</strong> <span class="text-primary">82/100</span></p>
+
+    <h2>Summary</h2>
+    <p>Paid search campaigns show strong performance with an average CPC of $8.45 and conversion rate of 4.2% (above industry average of 3.1%). Current monthly spend of $125K generates approximately 590 qualified leads. However, account structure could be optimized with better campaign segmentation and more sophisticated bidding strategies. Quality Score averages 7.2/10, indicating room for improvement in ad relevance and landing page experience.</p>
+
+    <h2>Key Findings</h2>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Strong conversion rate on brand campaigns</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Campaign Performance</p>
+      <p class="finding-description">Brand campaigns converting at 12.3% with CPC of $3.20. Protecting brand terms effectively and capturing high-intent traffic from users actively searching for Anthropic.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Competitor campaigns underutilized</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Competitive Strategy</p>
+      <p class="finding-description">Only bidding on 3 competitor terms with monthly budget of $8K. Competitors are capturing 23% of search volume for AI API keywords. Opportunity to capture consideration-stage users.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Quality Score improvements needed</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Account Optimization</p>
+      <p class="finding-description">Average Quality Score of 7.2/10 indicates ad-to-landing page relevance gaps. Improving to 9/10 could reduce CPC by 30-40% and increase impression share.</p>
+    </div>
+
+    <h2>Recommendations</h2>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Expand competitor keyword targeting</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$15,000-25,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">28% increase in qualified leads</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Create dedicated landing pages for ad groups</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-high">HIGH EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$12,000-20,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">35% Quality Score improvement</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Implement automated bidding strategies</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-low">LOW EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$0-500</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">15-20% CPA reduction</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: PAID SOCIAL ANALYSIS -->
+  <div class="page-break">
+    <h1>6. Paid Social Analysis</h1>
+    <p><strong>Score:</strong> <span class="text-primary">78/100</span></p>
+
+    <h2>Summary</h2>
+    <p>Paid social campaigns on LinkedIn and Twitter show promising results with monthly spend of $85K generating 420 MQLs. LinkedIn performs particularly well with engineering and technical decision-maker audiences (CTR: 1.8%, conversion rate: 3.4%). However, creative refresh rate is too slow (once per quarter vs. recommended bi-weekly), and audience segmentation could be more sophisticated. Retargeting campaigns show 5.2x ROI but only account for 15% of budget.</p>
+
+    <h2>Key Findings</h2>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">LinkedIn campaigns outperform other channels</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Channel Performance</p>
+      <p class="finding-description">LinkedIn drives 68% of paid social conversions at CPA of $198 vs. Twitter's $342. Technical job title targeting on LinkedIn reaches high-value developer audience effectively.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Creative fatigue reducing campaign efficiency</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Creative Strategy</p>
+      <p class="finding-description">Same ad creatives running for 90+ days show 40% CTR decline. Frequency of 7.2 impressions per user indicates overexposure. Need bi-weekly creative refresh for optimal performance.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Retargeting campaigns show exceptional ROI</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Remarketing</p>
+      <p class="finding-description">Retargeting campaigns converting at 8.7% with CPA of $125 (5.2x better than prospecting). Only using 15% of budget on retargeting represents missed opportunity.</p>
+    </div>
+
+    <h2>Recommendations</h2>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Increase retargeting budget allocation to 35%</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-quick-win">QUICK-WIN</span>
+          <span class="effort-badge effort-low">LOW EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$0 (reallocation)</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">42% increase in conversions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Establish bi-weekly creative refresh schedule</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$8,000-15,000/month</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">55% improvement in CTR</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Test video ads showcasing product capabilities</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$10,000-20,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">65% engagement increase</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: BRAND & MESSAGING AUDIT -->
+  <div class="page-break">
+    <h1>7. Brand & Messaging Audit</h1>
+    <p><strong>Score:</strong> <span class="text-primary">61/100</span></p>
+
+    <h2>Summary</h2>
+    <p>Brand awareness among target technical audiences is strong (62% aided recall), but messaging lacks differentiation in an increasingly crowded AI market. Value propositions focus heavily on "safety" and "reliability" which resonate well with enterprise buyers but may not be distinctive enough as competitors adopt similar positioning. Brand recall testing shows Anthropic is remembered by 34% of prospects vs. OpenAI's 78%, indicating opportunity to strengthen brand presence and memorability.</p>
+
+    <h2>Key Findings</h2>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Generic messaging reduces memorability</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Brand Positioning</p>
+      <p class="finding-description">Key messages like "safe and reliable AI" are used by 6 major competitors. Need more distinctive positioning that captures Anthropic's unique approach to constitutional AI and alignment research.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Strong brand equity among AI researchers</div>
+        <span class="severity-badge severity-low">LOW</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Brand Perception</p>
+      <p class="finding-description">78% brand awareness among AI/ML researchers with 4.3/5 trust rating. Research-focused positioning and thought leadership creates strong credibility in technical community.</p>
+    </div>
+
+    <div class="finding-item">
+      <div class="finding-header">
+        <div class="finding-title">Inconsistent visual identity across touchpoints</div>
+        <span class="severity-badge severity-medium">MEDIUM</span>
+      </div>
+      <p class="finding-description"><strong>Category:</strong> Brand Consistency</p>
+      <p class="finding-description">Documentation, marketing site, and product use different color schemes and typography. Visual inconsistency reduces brand recognition and professional perception.</p>
+    </div>
+
+    <h2>Recommendations</h2>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Develop distinctive brand positioning and messaging</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-long-term">LONG-TERM</span>
+          <span class="effort-badge effort-high">HIGH EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$35,000-60,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">45% brand recall improvement</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Create comprehensive brand guidelines</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-short-term">SHORT-TERM</span>
+          <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$8,000-15,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">Consistent brand experience</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation-item">
+      <div class="recommendation-header">
+        <div class="recommendation-title">Launch brand awareness campaign highlighting differentiators</div>
+        <div class="recommendation-meta">
+          <span class="priority-badge priority-long-term">LONG-TERM</span>
+          <span class="effort-badge effort-high">HIGH EFFORT</span>
+        </div>
+      </div>
+      <div class="recommendation-details">
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Cost:</span>
+          <span class="recommendation-detail-value">$50,000-100,000</span>
+        </div>
+        <div class="recommendation-detail">
+          <span class="recommendation-detail-label">Expected Impact:</span>
+          <span class="recommendation-detail-value">60% aided awareness increase</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: PRIORITIZED ACTION PLAN -->
+  <div class="page-break">
+    <h1>8. Prioritized Action Plan</h1>
+    <p>Based on our comprehensive audit, we've organized all recommendations into a prioritized action plan. Each initiative is categorized by timeline, effort, cost, and expected ROI.</p>
+
+    <div class="action-plan">
+      <!-- QUICK WINS (0-30 days) -->
+      <div class="action-phase">
+        <div class="action-phase-header">
+          <div class="action-phase-title">Quick Wins (0-30 days)</div>
+          <div class="action-phase-subtitle">Low effort, high impact initiatives to implement immediately</div>
+        </div>
+        <div class="action-items">
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Implement schema markup for rich snippets</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-low">LOW EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>SEO</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$500-1,500</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">25-35% CTR improvement</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Add social proof to trial signup page</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-low">LOW EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Conversion Optimization</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$1,000-2,500</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">18-25% conversion lift</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Increase retargeting budget allocation to 35%</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-low">LOW EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Paid Social</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$0 (reallocation)</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">42% conversion increase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Implement automated bidding strategies</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-low">LOW EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Paid Search</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$0-500</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">15-20% CPA reduction</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Develop executive-focused messaging and case studies</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-low">LOW EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Audience & Market</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$3,000-7,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">22% lift in enterprise deals</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SHORT-TERM (1-3 months) -->
+      <div class="action-phase">
+        <div class="action-phase-header">
+          <div class="action-phase-title">Short-Term (1-3 months)</div>
+          <div class="action-phase-subtitle">Medium effort initiatives for sustained growth</div>
+        </div>
+        <div class="action-items">
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Optimize Core Web Vitals and page speed</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-high">HIGH EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>SEO</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$15,000-30,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">40% mobile traffic improvement</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Simplify trial signup flow to 3 steps</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Conversion Optimization</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$5,000-10,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">45% signup completion increase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Create comparison content targeting commercial keywords</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Content Strategy</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$8,000-15,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">35% demo request increase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Launch thought leadership video series</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Content Strategy</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$5,000-10,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">40% brand awareness increase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Establish bi-weekly creative refresh schedule</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Paid Social</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$8,000-15,000/month</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">55% CTR improvement</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Create SMB-focused landing pages and pricing tiers</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Audience & Market</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$8,000-15,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">35% SMB conversion increase</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- LONG-TERM (3-6 months) -->
+      <div class="action-phase">
+        <div class="action-phase-header">
+          <div class="action-phase-title">Long-Term (3-6 months)</div>
+          <div class="action-phase-subtitle">Strategic initiatives for market leadership</div>
+        </div>
+        <div class="action-items">
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Create targeted content for high-volume AI keywords</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-medium">MEDIUM EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>SEO</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$12,000-25,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">75% organic traffic increase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Establish consistent 8-12 posts/month publishing cadence</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-high">HIGH EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Content Strategy</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$20,000-40,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">120% organic traffic increase</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Launch academic research partnership program</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-high">HIGH EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Audience & Market</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$25,000-50,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">50% brand awareness in academia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Develop distinctive brand positioning and messaging</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-high">HIGH EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Brand & Messaging</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$35,000-60,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">45% brand recall improvement</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-item">
+            <div class="recommendation-header">
+              <div class="recommendation-title">Launch brand awareness campaign highlighting differentiators</div>
+              <div class="recommendation-meta">
+                <span class="effort-badge effort-high">HIGH EFFORT</span>
+              </div>
+            </div>
+            <div class="recommendation-details">
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Category:</span>
+                <span>Brand & Messaging</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Cost:</span>
+                <span class="recommendation-detail-value">$50,000-100,000</span>
+              </div>
+              <div class="recommendation-detail">
+                <span class="recommendation-detail-label">Expected Impact:</span>
+                <span class="recommendation-detail-value">60% aided awareness increase</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- INVESTMENT SUMMARY -->
+    <div class="investment-summary">
+      <div class="investment-header">
+        <div class="investment-title">Investment Summary & ROI Projections</div>
+      </div>
+      <div class="investment-stats">
+        <div class="investment-stat">
+          <div class="investment-stat-label">Total Investment</div>
+          <div class="investment-stat-value">$200K-450K</div>
+        </div>
+        <div class="investment-stat">
+          <div class="investment-stat-label">Estimated ROI</div>
+          <div class="investment-stat-value">250-400%</div>
+        </div>
+        <div class="investment-stat">
+          <div class="investment-stat-label">Payback Period</div>
+          <div class="investment-stat-value">4-6 months</div>
+        </div>
+      </div>
+      <p style="margin-top: 24px; font-size: 10pt; color: var(--color-text-secondary); text-align: center;">
+        Based on current traffic levels and conversion rates, implementing these recommendations could generate an additional $1.2M-1.8M in annual revenue while reducing customer acquisition costs by 35-40%.
+      </p>
+    </div>
+  </div>
+
+  <!-- CALL TO ACTION -->
+  <div class="cta-section page-break">
+    <h2 class="cta-title">Ready to Transform Your Marketing?</h2>
+    <p class="cta-description">
+      Our team of marketing experts is ready to help you implement these recommendations and achieve measurable results.
+      Book a free 30-minute strategy call to discuss your unique situation and create a customized implementation roadmap.
+    </p>
+    <div class="cta-button">📅 Book Your Free Strategy Call</div>
+    <div class="cta-contact">
+      https://marketingscan.ai • hello@leander.inc • +1 (555) 123-4567
+    </div>
+  </div>
+
+  <!-- FINAL PAGE -->
+  <div class="cover-page">
+    <div class="cover-content" style="justify-content: center; text-align: center;">
+      <div class="cover-logo" style="margin-bottom: 40px;">MarketingScan AI</div>
+      <div style="font-size: 18pt; margin-bottom: 32px; opacity: 0.9;">
+        Thank you for choosing MarketingScan AI
+      </div>
+      <div style="font-size: 14pt; opacity: 0.8; margin-bottom: 40px;">
+        We're committed to helping Anthropic<br>
+        achieve exceptional marketing results.
+      </div>
+      <div style="font-size: 12pt; opacity: 0.7;">
+        For questions about this report, contact:<br>
+        <strong>hello@leander.inc</strong>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
